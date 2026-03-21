@@ -29,7 +29,7 @@ function CreateVcPage() {
 
       if (response.ok) {
         alert("VC Profile Registered Successfully in the Database!");
-        navigate('/data-entry');
+        navigate('/');
       } else {
         setError(data.message || 'Failed to register VC');
       }

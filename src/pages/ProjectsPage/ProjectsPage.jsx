@@ -52,7 +52,7 @@ function ProjectsPage() {
         {loading ? (
           <h3 style={{ color: '#f8fafc' }}>Loading projects...</h3>
         ) : projects.length === 0 ? (
-          <h3 style={{ color: '#f8fafc' }}>No projects found.</h3>
+          <h3 style={{ color: '#f8fafc', fontStyle: 'italic', textAlign: 'center', marginTop: '2rem' }}>This category currently has no projects submitted.</h3>
         ) : (
           <div className="projects-list">
             {projects.map((project) => (

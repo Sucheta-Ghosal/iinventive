@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import projectRoutes from './routes/projectRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import participantRoutes from './routes/participantRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/projects', projectRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/participants', participantRoutes);
 
 app.get('/', (req, res) => {
   res.send('API is running securely...');

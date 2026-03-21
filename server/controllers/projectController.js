@@ -34,3 +34,15 @@ export const getProjectBySlug = async (req, res) => {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
+
+// @desc    Get active categories that have projects
+// @route   GET /api/projects/active-categories
+// @access  Public
+export const getActiveCategories = async (req, res) => {
+  try {
+    const activeCategories = await Project.distinct('type');
+    res.json(activeCategories);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error retrieving categories dynamically', error: error.message });
+  }
+};

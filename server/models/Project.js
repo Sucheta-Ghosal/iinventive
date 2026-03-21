@@ -32,10 +32,6 @@ const projectSchema = new mongoose.Schema({
   affiliation: {
     type: String,
     required: true
-  },
-  contact: {
-    email: { type: String, required: true },
-    phone: { type: String, required: true }
   }
 }, {
   timestamps: true
