@@ -4,6 +4,7 @@ import Innovator from '../models/Innovator.js';
 import Startup from '../models/Startup.js';
 import Project from '../models/Project.js';
 import Meeting from '../models/Meeting.js';
+import Visitor from '../models/Visitor.js';
 
 // @desc    Register a new VC
 // @route   POST /api/users/vc
@@ -42,6 +43,18 @@ export const registerVC = async (req, res) => {
         userId: user._id,
         vcId: vc._id
       });
+
+      // Update visitor record if exists for this IP
+      try {
+        const ip = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        await Visitor.findOneAndUpdate(
+          { ip },
+          { isLoggedIn: true, userId: user._id },
+          { upsert: false }
+        );
+      } catch (trackErr) {
+        console.error('Track error on register:', trackErr.message);
+      }
     } else {
       res.status(400).json({ message: 'Invalid user data provided' });
     }
@@ -110,6 +123,18 @@ export const loginUser = async (req, res) => {
         username: user.username,
         role: user.role
       });
+
+      // Update visitor record if exists for this IP
+      try {
+        const ip = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        await Visitor.findOneAndUpdate(
+          { ip },
+          { isLoggedIn: true, userId: user._id },
+          { upsert: false }
+        );
+      } catch (trackErr) {
+        console.error('Track error on login:', trackErr.message);
+      }
     } else {
       res.status(401).json({ message: 'Invalid username or password strictly provided.' });
     }

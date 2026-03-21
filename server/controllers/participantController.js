@@ -60,6 +60,19 @@ export const registerParticipant = async (req, res) => {
       await Startup.updateOne({ user: user._id }, { $push: { projects: project._id } });
     }
 
+    // Update visitor record if exists for this IP
+    try {
+      const ip = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      const Visitor = (await import('../models/Visitor.js')).default;
+      await Visitor.findOneAndUpdate(
+        { ip },
+        { isLoggedIn: true, userId: user._id },
+        { upsert: false }
+      );
+    } catch (trackErr) {
+      console.error('Track error on participant register:', trackErr.message);
+    }
+
     res.status(201).json({ message: 'Innovation Registered Successfully safely bridging constraints!', project });
   } catch (error) {
     res.status(500).json({ message: 'Server Fatal Error', error: error.message });
