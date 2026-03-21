@@ -26,6 +26,11 @@ const vcSchema = new mongoose.Schema({
   interestedProjects: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project'
+  }],
+  meetupRequests: [{
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+    date: { type: Date, default: Date.now }
   }]
 }, {
   timestamps: true

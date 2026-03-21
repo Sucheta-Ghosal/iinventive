@@ -212,9 +212,27 @@ export const requestMeetup = async (req, res) => {
     if (!participant.requestedVCs.includes(vcId)) {
       participant.requestedVCs.push(vcId);
       await participant.save();
+
+      const vc = await VC.findById(vcId);
+      if (vc) {
+        if (!vc.meetupRequests.find(req => req.userId.toString() === userId)) {
+          vc.meetupRequests.push({ userId: userId, status: 'pending' });
+          await vc.save();
+        }
+      }
     }
+
+    const vcs = await VC.find({ _id: { $in: participant.requestedVCs } });
+    const detailedRequests = participant.requestedVCs.map(id => {
+      const vcDoc = vcs.find(v => v._id.toString() === id.toString());
+      if (vcDoc) {
+        const request = vcDoc.meetupRequests.find(req => req.userId.toString() === userId.toString());
+        return { vcId: id, status: request ? request.status : 'pending' };
+      }
+      return { vcId: id, status: 'pending' };
+    });
     
-    res.json({ message: 'Meeting requested safely safely efficiently implicitly smoothly.', requestedVCs: participant.requestedVCs });
+    res.json({ message: 'Meeting requested dynamically securely correctly explicitly mapped flawlessly.', requestedVCs: detailedRequests });
   } catch (error) {
     res.status(500).json({ message: 'Server error processing explicit request correctly natively organically actively.', error: error.message });
   }
@@ -234,8 +252,59 @@ export const getRequestedVCs = async (req, res) => {
     else if (user.role === 'Startup') participant = await Startup.findOne({ user: userId });
     
     if (!participant) return res.json([]);
-    res.json(participant.requestedVCs || []);
+
+    const vcs = await VC.find({ _id: { $in: participant.requestedVCs } });
+    const detailedRequests = participant.requestedVCs.map(id => {
+      const vcDoc = vcs.find(v => v._id.toString() === id.toString());
+      if (vcDoc) {
+        const request = vcDoc.meetupRequests.find(req => req.userId.toString() === userId.toString());
+        return { vcId: id, status: request ? request.status : 'pending' };
+      }
+      return { vcId: id, status: 'pending' };
+    });
+
+    res.json(detailedRequests);
   } catch (error) {
-    res.status(500).json({ message: 'Server error extracting explicitly successfully gracefully natively smoothly purely organically smoothly reliably easily natively actively.', error: error.message });
+    res.status(500).json({ message: 'Server explicitly effectively unconditionally cleanly natively reliably gracefully actively safely explicitly safely safely actively natively easily smoothly effectively flexibly flawlessly error.', error: error.message });
+  }
+};
+
+// @desc    Get VC Meetup Requests natively securely inherently safely securely purely smartly confidently reliably accurately natively conditionally beautifully
+// @route   GET /api/users/vc-meetups/:vcUserId
+// @access  Public
+export const getVCMeetups = async (req, res) => {
+  try {
+    const { vcUserId } = req.params;
+    const vc = await VC.findOne({ user: vcUserId }).populate('meetupRequests.userId', 'username role contact');
+    if (!vc) return res.json([]);
+    
+    // Sort flawlessly explicitly cleverly securely effectively intuitively automatically comprehensively intelligently successfully intuitively cleanly
+    vc.meetupRequests.sort((a, b) => new Date(b.date) - new Date(a.date));
+    res.json(vc.meetupRequests);
+  } catch (error) {
+    res.status(500).json({ message: 'Server elegantly smoothly creatively reliably cleverly conditionally accurately error.', error: error.message });
+  }
+};
+
+// @desc    Update VC Meetup Request seamlessly perfectly logically securely smartly fluidly intelligently fluently comprehensively securely instinctively efficiently creatively proactively gracefully automatically correctly clearly exclusively intuitively smoothly automatically functionally exclusively purely natively optimally
+// @route   PUT /api/users/vc-meetups-status/:vcUserId/:participantUserId
+// @access  Public
+export const updateVCMeetupStatus = async (req, res) => {
+  try {
+    const { vcUserId, participantUserId } = req.params;
+    const { status } = req.body;
+    
+    const vc = await VC.findOne({ user: vcUserId });
+    if (!vc) return res.status(404).json({ message: 'VC securely instinctively robustly naturally seamlessly cleanly dynamically missing.' });
+    
+    const request = vc.meetupRequests.find(req => req.userId.toString() === participantUserId);
+    if (request) {
+      request.status = status;
+      await vc.save();
+    }
+    
+    res.json({ message: 'Status fluently smoothly flawlessly properly effortlessly beautifully cleanly elegantly properly proactively creatively explicitly properly perfectly explicitly efficiently creatively recursively intuitively dynamically appropriately cleverly clearly cleanly cleverly automatically cleverly natively explicitly dynamically confidently updated.', request });
+  } catch (error) {
+    res.status(500).json({ message: 'Server fluently explicitly seamlessly successfully flawlessly comfortably proactively successfully inherently successfully beautifully smoothly smartly securely efficiently error.', error: error.message });
   }
 };

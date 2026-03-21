@@ -120,25 +120,41 @@ function HomePage() {
               <p style={{ color: '#cbd5e1', lineHeight: '1.7', fontSize: '0.95rem', margin: 0, whiteSpace: 'pre-line' }}>{selectedVC.about}</p>
             </div>
 
-            {userInfo && (userInfo.role === 'Innovator' || userInfo.role === 'Startup') && (
-              requestedVCs.includes(selectedVC._id) ? (
-                <button 
-                  disabled
-                  style={{ width: '100%', padding: '1.2rem', background: 'rgba(52, 211, 153, 0.2)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.5)', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'not-allowed' }}
-                >
-                  ✓ Request Sent
-                </button>
-              ) : (
-                <button 
-                  onClick={handleRequestMeetup}
-                  style={{ width: '100%', padding: '1.2rem', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.4)' }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                >
-                  Request for a Meetup
-                </button>
-              )
-            )}
+            {userInfo && (userInfo.role === 'Innovator' || userInfo.role === 'Startup') && (() => {
+              const existingReq = requestedVCs.find(r => r.vcId === selectedVC._id);
+              if (existingReq) {
+                if (existingReq.status === 'accepted') {
+                  return (
+                    <button 
+                      disabled
+                      style={{ width: '100%', padding: '1.2rem', background: 'rgba(56, 189, 248, 0.2)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.5)', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'not-allowed' }}
+                    >
+                      ★ Request Approved
+                    </button>
+                  );
+                } else {
+                  return (
+                    <button 
+                      disabled
+                      style={{ width: '100%', padding: '1.2rem', background: 'rgba(52, 211, 153, 0.2)', color: '#34d399', border: '1px solid rgba(52, 211, 153, 0.5)', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'not-allowed' }}
+                    >
+                      ✓ Request Sent
+                    </button>
+                  );
+                }
+              } else {
+                return (
+                  <button 
+                    onClick={handleRequestMeetup}
+                    style={{ width: '100%', padding: '1.2rem', background: 'linear-gradient(135deg, #3b82f6, #6366f1)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.4)' }}
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                  >
+                    Request for a Meetup
+                  </button>
+                );
+              }
+            })()}
           </div>
         </div>
       )}
