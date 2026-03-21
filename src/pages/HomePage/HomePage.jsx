@@ -105,19 +105,19 @@ function HomePage() {
       </main>
 
       {selectedVC && (
-        <div className="vc-modal-overlay" onClick={() => setSelectedVC(null)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000, padding: '1rem' }}>
-          <div className="vc-modal-content" onClick={e => e.stopPropagation()} style={{ background: '#1e293b', padding: '2.5rem', borderRadius: '16px', width: '100%', maxWidth: '550px', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
-            <button onClick={() => setSelectedVC(null)} style={{ position: 'absolute', top: '1.2rem', right: '1.5rem', background: 'transparent', border: 'none', color: '#94a3b8', fontSize: '1.8rem', cursor: 'pointer', transition: 'color 0.2s' }}>&times;</button>
+        <div className="vc-modal-overlay" onClick={() => setSelectedVC(null)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000, padding: '1rem' }}>
+          <div className="vc-modal-content" onClick={e => e.stopPropagation()} style={{ background: '#ffffff', padding: '2.5rem', borderRadius: '16px', width: '100%', maxWidth: '550px', border: '1px solid #e2e8f0', position: 'relative', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)' }}>
+            <button onClick={() => setSelectedVC(null)} style={{ position: 'absolute', top: '1.2rem', right: '1.5rem', background: 'transparent', border: 'none', color: '#64748b', fontSize: '1.8rem', cursor: 'pointer', transition: 'color 0.2s' }}>&times;</button>
             
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <img src={selectedVC.picture} alt={selectedVC.name} style={{ width: '130px', height: '130px', borderRadius: '50%', objectFit: 'cover', border: '4px solid #38bdf8', marginBottom: '1rem', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)' }} />
-              <h3 style={{ margin: '0', color: '#f8fafc', fontSize: '1.8rem' }}>{selectedVC.name}</h3>
-              <span style={{ color: '#38bdf8', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 'bold' }}>Venture Capitalist</span>
+              <img src={selectedVC.picture} alt={selectedVC.name} style={{ width: '130px', height: '130px', borderRadius: '50%', objectFit: 'cover', border: '4px solid #38bdf8', marginBottom: '1rem', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }} />
+              <h3 style={{ margin: '0', color: '#0f172a', fontSize: '1.8rem' }}>{selectedVC.name}</h3>
+              <span style={{ color: '#0284c7', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 'bold' }}>Venture Capitalist</span>
             </div>
             
-            <div style={{ marginBottom: '2.5rem', background: 'rgba(15, 23, 42, 0.5)', padding: '1.5rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <h4 style={{ color: '#f1f5f9', margin: '0 0 0.8rem 0', fontSize: '1.1rem' }}>About Profile</h4>
-              <p style={{ color: '#cbd5e1', lineHeight: '1.7', fontSize: '0.95rem', margin: 0, whiteSpace: 'pre-line' }}>{selectedVC.about}</p>
+            <div style={{ marginBottom: '2.5rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+              <h4 style={{ color: '#1e293b', margin: '0 0 0.8rem 0', fontSize: '1.1rem' }}>About Profile</h4>
+              <p style={{ color: '#475569', lineHeight: '1.7', fontSize: '0.95rem', margin: 0, whiteSpace: 'pre-line' }}>{selectedVC.about}</p>
             </div>
 
             {userInfo && (userInfo.role === 'Innovator' || userInfo.role === 'Startup') && (() => {
