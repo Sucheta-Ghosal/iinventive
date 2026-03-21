@@ -19,6 +19,9 @@ const vcSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 5000
+  },
+  picture: {
+    type: String
   }
 }, {
   timestamps: true

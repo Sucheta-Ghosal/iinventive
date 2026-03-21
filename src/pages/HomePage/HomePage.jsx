@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import CategoryCard from '../../components/CategoryCard/CategoryCard';
 import './HomePage.css';
 
 function HomePage() {
+  const [vcs, setVcs] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/users/vcs')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setVcs(data);
+        }
+      })
+      .catch(err => console.error("Error fetching VCs:", err));
+  }, []);
+
   const categories = [
     { title: "Health Care", institute: "IIT KHARAGPUR", bgImage: "/images/healthcare_bg.png" },
     { title: "Materials Science", institute: "IIT(BHU) VARANASI", bgImage: "/images/materials_bg.png" },
     { title: "Earth Sciences", institute: "IIT(ISM) DHANBAD", bgImage: "/images/earth_bg.png" },
     { title: "Artificial Intelligence", institute: "IIT PATNA", bgImage: "/images/ai_bg.png" },
     { title: "Semiconductor Technology & Chip Design", institute: "IIT BHUBANESWAR", bgImage: "/images/semi_bg.png" },
-  ];
-
-  const vcs = [
-    { name: "Sarah Jenkins", firm: "Sequoia Capital", image: "https://i.pravatar.cc/150?img=5" },
-    { name: "Michael Chang", firm: "Andreessen Horowitz", image: "https://i.pravatar.cc/150?img=11" },
-    { name: "Elena Rostova", firm: "Lightspeed Ventures", image: "https://i.pravatar.cc/150?img=9" },
-    { name: "David O'Connor", firm: "Accel Partners", image: "https://i.pravatar.cc/150?img=8" },
   ];
 
   return (
@@ -44,13 +50,16 @@ function HomePage() {
           <h2>Attending Venture Capitalists</h2>
           <p>Meet the top investors looking to fund the next big breakthrough.</p>
           <div className="vcs-grid">
-            {vcs.map((vc, idx) => (
-              <div className="vc-card" key={idx} style={{ animationDelay: `${idx * 0.15 + 0.5}s` }}>
-                <img src={vc.image} alt={vc.name} className="vc-image" />
-                <h4>{vc.name}</h4>
-                <span className="vc-firm">{vc.firm}</span>
-              </div>
-            ))}
+            {vcs.length === 0 ? (
+              <p style={{ color: '#94a3b8', fontStyle: 'italic', gridColumn: '1 / -1', textAlign: 'center' }}>No VCs have been registered yet.</p>
+            ) : (
+              vcs.map((vc, idx) => (
+                <div className="vc-card" key={idx} style={{ animationDelay: `${idx * 0.15 + 0.5}s` }}>
+                  <img src={vc.picture} alt={vc.name} className="vc-image" />
+                  <h4>{vc.name}</h4>
+                </div>
+              ))
+            )}
           </div>
         </section>
       </main>
