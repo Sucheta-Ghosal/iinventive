@@ -34,16 +34,7 @@ function ParticipantDashboardPage() {
       });
   }, [navigate]);
 
-  const handleShareURL = (e, slug) => {
-    e.stopPropagation();
-    const projectUrl = `${window.location.origin}/project/${slug}`;
-    navigator.clipboard.writeText(projectUrl).then(() => {
-      alert("Project URL copied to clipboard instantly! Share it anywhere.");
-    }).catch(err => {
-      console.error("Failed to copy URL natively:", err);
-      alert("Failed to copy URL. Please try again.");
-    });
-  };
+
 
   return (
     <div className="participant-dashboard-page">
@@ -72,13 +63,6 @@ function ParticipantDashboardPage() {
               >
                 <div className="card-top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <span className="category-badge">{project.type}</span>
-                  <button 
-                    className="share-btn"
-                    onClick={(e) => handleShareURL(e, project.slug)}
-                    title="Share Project URL"
-                  >
-                    🔗 Share Link
-                  </button>
                 </div>
                 <h3>{project.title}</h3>
                 <div className="submitted-by">

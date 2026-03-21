@@ -102,6 +102,31 @@
   line-height: 1.8;
   color: #475569;
   white-space: pre-wrap;
+  margin-bottom: 2rem;
+}
+
+.share-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.share-btn:hover {
+  background: #ffffff;
+  border-color: #3b82f6;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
 }
 
 .profile-gallery {

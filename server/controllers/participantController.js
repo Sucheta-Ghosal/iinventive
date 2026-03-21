@@ -49,7 +49,7 @@ export const registerParticipant = async (req, res) => {
     }
 
     const project = await Project.create({
-      title, slug, type, affiliation, description, picture: picture ? [picture] : []
+      title, slug, type, affiliation, description, picture: picture ? [picture] : [], userId: user._id
     });
 
     if (role === 'Innovator') {

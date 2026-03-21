@@ -30,6 +30,16 @@ function ProjectProfilePage() {
     }
   };
 
+  const handleShareURL = () => {
+    const projectUrl = window.location.href;
+    navigator.clipboard.writeText(projectUrl).then(() => {
+      alert("Project URL copied to clipboard! Share it with your network.");
+    }).catch(err => {
+      console.error("Failed to copy URL:", err);
+      alert("Failed to copy URL. Please try again.");
+    });
+  };
+
   useEffect(() => {
     const stored = localStorage.getItem('userInfo');
     let currentUserInfo = null;
@@ -154,6 +164,14 @@ function ProjectProfilePage() {
               }}
             >
               {interested ? '✓ Expressed Interest' : '★ Express Interest'}
+            </button>
+          </div>
+        )}
+
+        {userInfo && project.userId && userInfo._id === project.userId && (
+          <div style={{ marginTop: '3rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <button className="share-btn" onClick={handleShareURL}>
+              🔗 Share Project Link
             </button>
           </div>
         )}

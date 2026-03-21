@@ -1,4 +1,6 @@
 import Project from '../models/Project.js';
+import Innovator from '../models/Innovator.js';
+import Startup from '../models/Startup.js';
 
 // @desc    Fetch all projects by category
 // @route   GET /api/projects/category/:category
@@ -26,7 +28,18 @@ export const getProjectBySlug = async (req, res) => {
     const project = await Project.findOne({ slug: req.params.slug });
     
     if (project) {
-      res.json(project);
+      // Create a shallow copy to add the owner ID for backward compatibility
+      const projectData = project.toObject();
+      if (!projectData.userId) {
+        const innovator = await Innovator.findOne({ projects: project._id });
+        if (innovator) {
+          projectData.userId = innovator.user;
+        } else {
+          const startup = await Startup.findOne({ projects: project._id });
+          if (startup) projectData.userId = startup.user;
+        }
+      }
+      res.json(projectData);
     } else {
       res.status(404).json({ message: 'Project not found' });
     }
