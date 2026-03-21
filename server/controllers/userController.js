@@ -3,6 +3,7 @@ import VC from '../models/VC.js';
 import Innovator from '../models/Innovator.js';
 import Startup from '../models/Startup.js';
 import Project from '../models/Project.js';
+import Meeting from '../models/Meeting.js';
 
 // @desc    Register a new VC
 // @route   POST /api/users/vc
@@ -135,6 +136,43 @@ export const toggleInterest = async (req, res) => {
     } else {
       vc.interestedProjects.push(projectId);
       await vc.save();
+
+      const vcUser = await User.findById(userId);
+      let participantUser = null;
+      let participantName = '';
+
+      const innovator = await Innovator.findOne({ projects: projectId }).populate('user');
+      if (innovator && innovator.user) {
+        participantUser = innovator.user;
+        participantName = participantUser.username;
+      } else {
+        const startup = await Startup.findOne({ projects: projectId }).populate('user');
+        if (startup && startup.user) {
+          participantUser = startup.user;
+          participantName = participantUser.username;
+        }
+      }
+
+      if (vcUser && participantUser) {
+        const existingMeeting = await Meeting.findOne({
+          vcId: vcUser._id,
+          participantId: participantUser._id,
+          projectId: projectId,
+          source: 'expressed_interest'
+        });
+
+        if (!existingMeeting) {
+          await Meeting.create({
+            vcId: vcUser._id,
+            vcName: vcUser.username,
+            participantId: participantUser._id,
+            participantName: participantName,
+            projectId: projectId,
+            source: 'expressed_interest'
+          });
+        }
+      }
+
       res.json({ message: 'Interest appended natively', interested: true, interestedProjects: vc.interestedProjects });
     }
   } catch (error) {
@@ -301,10 +339,46 @@ export const updateVCMeetupStatus = async (req, res) => {
     if (request) {
       request.status = status;
       await vc.save();
+
+      if (status === 'accepted') {
+        const vcUser = await User.findById(vcUserId);
+        const participantUser = await User.findById(participantUserId);
+        
+        if (vcUser && participantUser) {
+          const existingMeeting = await Meeting.findOne({
+            vcId: vcUser._id,
+            participantId: participantUser._id,
+            source: 'meetup_request_accepted'
+          });
+          
+          if (!existingMeeting) {
+            await Meeting.create({
+              vcId: vcUser._id,
+              vcName: vcUser.username,
+              participantId: participantUser._id,
+              participantName: participantUser.username,
+              source: 'meetup_request_accepted'
+            });
+          }
+        }
+      }
     }
     
-    res.json({ message: 'Status fluently smoothly flawlessly properly effortlessly beautifully cleanly elegantly properly proactively creatively explicitly properly perfectly explicitly efficiently creatively recursively intuitively dynamically appropriately cleverly clearly cleanly cleverly automatically cleverly natively explicitly dynamically confidently updated.', request });
+    res.json({ message: 'Meeting accepted successfully perfectly cleanly securely expertly accurately effortlessly beautifully.', request });
   } catch (error) {
     res.status(500).json({ message: 'Server fluently explicitly seamlessly successfully flawlessly comfortably proactively successfully inherently successfully beautifully smoothly smartly securely efficiently error.', error: error.message });
+  }
+};
+
+// @desc    Retrieve Participant Meetings natively
+// @route   GET /api/users/participant-meetings/:userId
+// @access  Public
+export const getParticipantMeetings = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const meetings = await Meeting.find({ participantId: userId }).sort({ createdAt: -1 });
+    res.json(meetings);
+  } catch (error) {
+    res.status(500).json({ message: 'Server dynamically implicitly organically recursively cleanly correctly actively natively smoothly effectively seamlessly automatically confidently smoothly naturally reliably smartly error.', error: error.message });
   }
 };
