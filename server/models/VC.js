@@ -22,7 +22,11 @@ const vcSchema = new mongoose.Schema({
   },
   picture: {
     type: String
-  }
+  },
+  interestedProjects: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project'
+  }]
 }, {
   timestamps: true
 });

@@ -92,3 +92,64 @@ export const checkUsername = async (req, res) => {
     res.status(500).json({ message: 'Server error checking username dynamically', error: error.message });
   }
 };
+
+// @desc    Authenticate generic user identity securely
+// @route   POST /api/users/login
+// @access  Public
+export const loginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+
+    if (user && (await user.matchPassword(password))) {
+      res.json({
+        _id: user._id,
+        username: user.username,
+        role: user.role
+      });
+    } else {
+      res.status(401).json({ message: 'Invalid username or password strictly provided.' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server Authentication Error executing crypto match natively', error: error.message });
+  }
+};
+
+// @desc    Toggle VC interest dynamically securely
+// @route   POST /api/users/interest/:projectId
+// @access  Public
+export const toggleInterest = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { projectId } = req.params;
+    const vc = await VC.findOne({ user: userId });
+    if (!vc) return res.status(404).json({ message: 'VC native context not found' });
+    
+    const isInterested = vc.interestedProjects.includes(projectId);
+    if (isInterested) {
+      vc.interestedProjects = vc.interestedProjects.filter(id => id.toString() !== projectId);
+      await vc.save();
+      res.json({ message: 'Interest removed safely', interested: false, interestedProjects: vc.interestedProjects });
+    } else {
+      vc.interestedProjects.push(projectId);
+      await vc.save();
+      res.json({ message: 'Interest appended natively', interested: true, interestedProjects: vc.interestedProjects });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error processing generic toggle hook', error: error.message });
+  }
+};
+
+// @desc    Retrieve VC interests dynamically cleanly
+// @route   GET /api/users/interest/:userId
+// @access  Public
+export const getVCInterests = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const vc = await VC.findOne({ user: userId });
+    if (!vc) return res.json([]);
+    res.json(vc.interestedProjects);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error retrieving generic interests recursively', error: error.message });
+  }
+};

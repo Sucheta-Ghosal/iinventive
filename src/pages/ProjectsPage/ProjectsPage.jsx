@@ -13,15 +13,31 @@ function ProjectsPage() {
 
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [vcInterests, setVcInterests] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
+
+    const stored = localStorage.getItem('userInfo');
+    let currentUserInfo = null;
+    if (stored) {
+      currentUserInfo = JSON.parse(stored);
+    }
     fetch(`http://localhost:5000/api/projects/category/${encodeURIComponent(categoryTitle)}`)
       .then(res => res.json())
       .then(data => {
         setProjects(Array.isArray(data) ? data : []);
         setLoading(false);
+        
+        if (currentUserInfo && currentUserInfo.role === 'VC') {
+           fetch(`http://localhost:5000/api/users/interest/${currentUserInfo._id}`)
+             .then(res => res.json())
+             .then(interests => {
+                if (Array.isArray(interests)) setVcInterests(interests);
+             })
+             .catch(err => console.error("Error connecting explicitly safely natively.", err));
+        }
       })
       .catch(err => {
         console.error(err);
@@ -60,7 +76,13 @@ function ProjectsPage() {
                 className="project-card clickable" 
                 key={project._id || project.id}
                 onClick={() => navigate(`/project/${project.slug}`)}
+                style={{ position: 'relative' }}
               >
+                {vcInterests.includes(project._id) && (
+                  <div style={{ position: 'absolute', top: '-12px', right: '1rem', background: '#34d399', color: '#0f172a', padding: '0.3rem 0.8rem', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 700, boxShadow: '0 4px 6px rgba(0,0,0,0.3)' }}>
+                    ✓ Already Expressed Interest
+                  </div>
+                )}
                 <h3>{project.title}</h3>
                 <div className="submitted-by">
                   <span className="badge">Affiliation</span>
