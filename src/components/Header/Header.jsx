@@ -23,7 +23,7 @@ function Header() {
   return (
     <header className="header">
       <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-        <img src="/images/logo.jpeg" alt="iinventive 2026 logo" className="logo-img" style={{ height: '75px', objectFit: 'contain' }} />
+        <img src="/images/logo.jpeg" alt="iinventive 2026 logo" className="logo-img" style={{ height: '60px', objectFit: 'contain' }} />
       </Link>
       <div className="nav-actions">
         {userInfo ? (
