@@ -68,6 +68,10 @@
   box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.1);
 }
 
+.project-card.clickable {
+  cursor: pointer;
+}
+
 .project-card h3 {
   font-size: 1.6rem;
   color: #f8fafc;

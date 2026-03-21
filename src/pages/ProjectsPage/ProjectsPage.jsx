@@ -1,23 +1,17 @@
 import React, { useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import { projectsData } from '../../data/projectsData';
+import { projectsData, categoryBackgrounds } from '../../data/projectsData';
 import './ProjectsPage.css';
 
 function ProjectsPage() {
   const { categoryId } = useParams();
+  const navigate = useNavigate();
   
   // Need to decode since URLs will have '%20'
   const categoryTitle = decodeURIComponent(categoryId);
   const projects = projectsData[categoryTitle];
 
-  const categoryBackgrounds = {
-    "Health Care": "/images/healthcare_bg.png",
-    "Materials Science": "/images/materials_bg.png",
-    "Earth Sciences": "/images/earth_bg.png",
-    "Artificial Intelligence": "/images/ai_bg.png",
-    "Semiconductor Technology & Chip Design": "/images/semi_bg.png"
-  };
   const bgImage = categoryBackgrounds[categoryTitle];
 
   useEffect(() => {
@@ -46,7 +40,11 @@ function ProjectsPage() {
 
         <div className="projects-list">
           {projects.map((project) => (
-            <div className="project-card" key={project.id}>
+            <div 
+              className="project-card clickable" 
+              key={project.id}
+              onClick={() => navigate(`/project/${project.id}`)}
+            >
               <h3>{project.title}</h3>
               <div className="submitted-by">
                 <span className="badge">Submitted By</span>
