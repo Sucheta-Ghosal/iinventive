@@ -1,25 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import { projectsData, categoryBackgrounds } from '../../data/projectsData';
+import { categoryBackgrounds } from '../../data/projectsData';
 import './ProjectsPage.css';
 
 function ProjectsPage() {
   const { categoryId } = useParams();
   const navigate = useNavigate();
   
-  // Need to decode since URLs will have '%20'
   const categoryTitle = decodeURIComponent(categoryId);
-  const projects = projectsData[categoryTitle];
-
   const bgImage = categoryBackgrounds[categoryTitle];
+
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setLoading(true);
+    fetch(`http://localhost:5000/api/projects/category/${encodeURIComponent(categoryTitle)}`)
+      .then(res => res.json())
+      .then(data => {
+        setProjects(Array.isArray(data) ? data : []);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
   }, [categoryTitle]);
 
-  if (!projects) {
-    return <Navigate to="/" />; // Redirect if invalid category
+  if (!categoryBackgrounds[categoryTitle]) {
+    return <Navigate to="/" />;
   }
 
   const pageStyle = bgImage ? {
@@ -38,22 +49,28 @@ function ProjectsPage() {
           <p>Discover the groundbreaking solutions and ideas submitted under this theme.</p>
         </div>
 
-        <div className="projects-list">
-          {projects.map((project) => (
-            <div 
-              className="project-card clickable" 
-              key={project.id}
-              onClick={() => navigate(`/project/${project.id}`)}
-            >
-              <h3>{project.title}</h3>
-              <div className="submitted-by">
-                <span className="badge">Submitted By</span>
-                <strong>{project.submittedBy}</strong>
+        {loading ? (
+          <h3 style={{ color: '#f8fafc' }}>Loading projects...</h3>
+        ) : projects.length === 0 ? (
+          <h3 style={{ color: '#f8fafc' }}>No projects found.</h3>
+        ) : (
+          <div className="projects-list">
+            {projects.map((project) => (
+              <div 
+                className="project-card clickable" 
+                key={project._id || project.id}
+                onClick={() => navigate(`/project/${project.slug}`)}
+              >
+                <h3>{project.title}</h3>
+                <div className="submitted-by">
+                  <span className="badge">Affiliation</span>
+                  <strong>{project.affiliation}</strong>
+                </div>
+                <p className="description">{project.description && project.description.length > 130 ? project.description.substring(0, 130) + '...' : project.description}</p>
               </div>
-              <p className="description">{project.description}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   );

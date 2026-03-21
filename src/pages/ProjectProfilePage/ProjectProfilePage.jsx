@@ -1,18 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import { getProjectById, categoryBackgrounds } from '../../data/projectsData';
+import { categoryBackgrounds } from '../../data/projectsData';
 import './ProjectProfilePage.css';
 
 function ProjectProfilePage() {
-  const { projectId } = useParams();
+  const { projectSlug } = useParams();
   const navigate = useNavigate();
   
-  const project = getProjectById(projectId);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [projectId]);
+    setLoading(true);
+    fetch(`http://localhost:5000/api/projects/profile/${projectSlug}`)
+      .then(res => res.json())
+      .then(data => {
+        // If data returns successfully and isn't a 404 message object
+        if (!data.message) {
+          setProject(data);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [projectSlug]);
+
+  if (loading) {
+    return (
+      <div className="profile-page">
+        <Header />
+        <main className="profile-content not-found">
+          <h2>Loading Project Details...</h2>
+        </main>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
@@ -26,7 +52,7 @@ function ProjectProfilePage() {
     );
   }
 
-  const bgImage = categoryBackgrounds[project.category];
+  const bgImage = categoryBackgrounds[project.type];
   const pageStyle = bgImage ? {
     backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), url(${bgImage})`,
     backgroundSize: 'cover',
@@ -44,21 +70,21 @@ function ProjectProfilePage() {
         <header className="profile-header">
           <h1>{project.title}</h1>
           <div className="submitted-by-large">
-            <span className="badge">Submitted By</span>
-            <h2>{project.submittedBy}</h2>
+            <span className="badge">Affiliation</span>
+            <h2>{project.affiliation}</h2>
           </div>
         </header>
 
         <section className="profile-description">
-          <h3>Project Overview</h3>
-          <p>{project.longDescription}</p>
+          <h3>Project Description</h3>
+          <p>{project.description}</p>
         </section>
 
-        {project.images && project.images.length > 0 && (
+        {project.picture && project.picture.length > 0 && (
           <section className="profile-gallery">
             <h3>Gallery</h3>
             <div className="gallery-grid">
-              {project.images.map((imgUrl, idx) => (
+              {project.picture.map((imgUrl, idx) => (
                 <div className="gallery-image-wrapper" key={idx}>
                   <img src={imgUrl} alt={`${project.title} - view ${idx + 1}`} />
                 </div>
