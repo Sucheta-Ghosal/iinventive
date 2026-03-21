@@ -98,6 +98,26 @@ function VCMeetupRequestsPage() {
                     </div>
                   )}
 
+                  <div className="review-action" style={{ marginTop: '1rem' }}>
+                    <button 
+                      className="review-btn" 
+                      onClick={() => navigate(`/vc/review-projects/${participantNode._id}`)}
+                      style={{
+                        width: '100%',
+                        padding: '0.7rem',
+                        background: 'rgba(59, 130, 246, 0.1)',
+                        color: '#3b82f6',
+                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                        borderRadius: '8px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      📂 Review Projects
+                    </button>
+                  </div>
+
                   {reqItem.status === 'accepted' && (
                     <div className="contact-reveal">
                       <p><strong>Contact Email:</strong> {participantNode.contact?.email || 'N/A'}</p>

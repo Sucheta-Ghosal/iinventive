@@ -1,0 +1,137 @@
+.review-projects-page {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dashboard-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.dashboard-header {
+  margin-bottom: 2.5rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding: 0;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.back-btn:hover {
+  color: #3b82f6;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.dashboard-header p {
+  color: #64748b;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.project-review-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-review-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.project-info {
+  flex: 1;
+}
+
+.project-title-link {
+  font-size: 1.25rem;
+  color: #0f172a;
+  margin: 0 0 0.6rem 0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.project-title-link:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.project-excerpt {
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.8rem;
+  min-width: 180px;
+  justify-content: flex-end;
+}
+
+.accept-project-btn, .reject-project-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.accept-project-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+}
+
+.accept-project-btn:hover {
+  background: #059669;
+}
+
+.reject-project-btn {
+  background: white;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+.reject-project-btn:hover {
+  background: #fef2f2;
+}
+
+.accepted-label {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.loading-state, .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #64748b;
+}

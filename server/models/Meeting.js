@@ -23,11 +23,11 @@ const meetingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project'
   },
-  source: {
+  /*source: {
     type: String,
     enum: ['expressed_interest', 'meetup_request_accepted'],
     required: true
-  }
+  }*/
 }, {
   timestamps: true
 });

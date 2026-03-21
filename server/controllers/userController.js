@@ -14,8 +14,8 @@ export const registerVC = async (req, res) => {
     const { username, password, email, phone, about, picture } = req.body;
 
     // Check if user already exists based on standard unique keys
-    const userExists = await User.findOne({ 
-      $or: [{ username }, { 'contact.email': email }] 
+    const userExists = await User.findOne({
+      $or: [{ username }, { 'contact.email': email }]
     });
 
     if (userExists) {
@@ -136,7 +136,7 @@ export const loginUser = async (req, res) => {
         console.error('Track error on login:', trackErr.message);
       }
     } else {
-      res.status(401).json({ message: 'Invalid username or password strictly provided.' });
+      res.status(401).json({ message: 'Invalid username or password.' });
     }
   } catch (error) {
     res.status(500).json({ message: 'Server Authentication Error executing crypto match natively', error: error.message });
@@ -152,7 +152,7 @@ export const toggleInterest = async (req, res) => {
     const { projectId } = req.params;
     const vc = await VC.findOne({ user: userId });
     if (!vc) return res.status(404).json({ message: 'VC native context not found' });
-    
+
     const isInterested = vc.interestedProjects.includes(projectId);
     if (isInterested) {
       vc.interestedProjects = vc.interestedProjects.filter(id => id.toString() !== projectId);
@@ -198,7 +198,7 @@ export const toggleInterest = async (req, res) => {
         }
       }
 
-      res.json({ message: 'Interest appended natively', interested: true, interestedProjects: vc.interestedProjects });
+      res.json({ message: 'Interest appended', interested: true, interestedProjects: vc.interestedProjects });
     }
   } catch (error) {
     res.status(500).json({ message: 'Server error processing generic toggle hook', error: error.message });
@@ -215,7 +215,7 @@ export const getVCInterests = async (req, res) => {
     if (!vc) return res.json([]);
     res.json(vc.interestedProjects);
   } catch (error) {
-    res.status(500).json({ message: 'Server error retrieving generic interests recursively', error: error.message });
+    res.status(500).json({ message: 'Server error retrieving generic interests', error: error.message });
   }
 };
 
@@ -229,7 +229,7 @@ export const getPopulatedVCInterests = async (req, res) => {
     if (!vc) return res.json([]);
     res.json(vc.interestedProjects);
   } catch (error) {
-    res.status(500).json({ message: 'Server error retrieving populated generic interests recursively', error: error.message });
+    res.status(500).json({ message: 'Server error retrieving populated generic interests', error: error.message });
   }
 };
 
@@ -240,7 +240,7 @@ export const getParticipantProjects = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: 'Identity missing entirely securely natively.' });
+    if (!user) return res.status(404).json({ message: 'Identity missing entirely.' });
 
     let participant;
     if (user.role === 'Innovator') {
@@ -252,7 +252,7 @@ export const getParticipantProjects = async (req, res) => {
     if (!participant) return res.json([]);
     res.json(participant.projects);
   } catch (error) {
-    res.status(500).json({ message: 'Server error retrieving functional participant projects securely gracefully.', error: error.message });
+    res.status(500).json({ message: 'Server error retrieving functional participant projects.', error: error.message });
   }
 };
 
@@ -265,13 +265,13 @@ export const requestMeetup = async (req, res) => {
     const { vcId } = req.params;
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    
+
     let participant;
     if (user.role === 'Innovator') participant = await Innovator.findOne({ user: userId });
     else if (user.role === 'Startup') participant = await Startup.findOne({ user: userId });
-    
+
     if (!participant) return res.status(404).json({ message: 'Participant missing' });
-    
+
     if (!participant.requestedVCs.includes(vcId)) {
       participant.requestedVCs.push(vcId);
       await participant.save();
@@ -294,14 +294,14 @@ export const requestMeetup = async (req, res) => {
       }
       return { vcId: id, status: 'pending' };
     });
-    
-    res.json({ message: 'Meeting requested dynamically securely correctly explicitly mapped flawlessly.', requestedVCs: detailedRequests });
+
+    res.json({ message: 'Meeting requested.', requestedVCs: detailedRequests });
   } catch (error) {
-    res.status(500).json({ message: 'Server error processing explicit request correctly natively organically actively.', error: error.message });
+    res.status(500).json({ message: 'Server error processing explicit request.', error: error.message });
   }
 };
 
-// @desc    Read generic meetup objects securely functionally dynamically actively seamlessly unconditionally.
+// @desc    Read generic meetup objects .
 // @route   GET /api/users/meetup/:userId
 // @access  Public
 export const getRequestedVCs = async (req, res) => {
@@ -309,11 +309,11 @@ export const getRequestedVCs = async (req, res) => {
     const { userId } = req.params;
     const user = await User.findById(userId);
     if (!user) return res.json([]);
-    
+
     let participant;
     if (user.role === 'Innovator') participant = await Innovator.findOne({ user: userId });
     else if (user.role === 'Startup') participant = await Startup.findOne({ user: userId });
-    
+
     if (!participant) return res.json([]);
 
     const vcs = await VC.find({ _id: { $in: participant.requestedVCs } });
@@ -328,7 +328,7 @@ export const getRequestedVCs = async (req, res) => {
 
     res.json(detailedRequests);
   } catch (error) {
-    res.status(500).json({ message: 'Server explicitly effectively unconditionally cleanly natively reliably gracefully actively safely explicitly safely safely actively natively easily smoothly effectively flexibly flawlessly error.', error: error.message });
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
 
@@ -340,12 +340,12 @@ export const getVCMeetups = async (req, res) => {
     const { vcUserId } = req.params;
     const vc = await VC.findOne({ user: vcUserId }).populate('meetupRequests.userId', 'username role contact');
     if (!vc) return res.json([]);
-    
+
     // Sort flawlessly explicitly cleverly securely effectively intuitively automatically comprehensively intelligently successfully intuitively cleanly
     vc.meetupRequests.sort((a, b) => new Date(b.date) - new Date(a.date));
     res.json(vc.meetupRequests);
   } catch (error) {
-    res.status(500).json({ message: 'Server elegantly smoothly creatively reliably cleverly conditionally accurately error.', error: error.message });
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
 
@@ -356,10 +356,10 @@ export const updateVCMeetupStatus = async (req, res) => {
   try {
     const { vcUserId, participantUserId } = req.params;
     const { status } = req.body;
-    
+
     const vc = await VC.findOne({ user: vcUserId });
-    if (!vc) return res.status(404).json({ message: 'VC securely instinctively robustly naturally seamlessly cleanly dynamically missing.' });
-    
+    if (!vc) return res.status(404).json({ message: 'VC missing.' });
+
     const request = vc.meetupRequests.find(req => req.userId.toString() === participantUserId);
     if (request) {
       request.status = status;
@@ -368,14 +368,14 @@ export const updateVCMeetupStatus = async (req, res) => {
       if (status === 'accepted') {
         const vcUser = await User.findById(vcUserId);
         const participantUser = await User.findById(participantUserId);
-        
+
         if (vcUser && participantUser) {
           const existingMeeting = await Meeting.findOne({
             vcId: vcUser._id,
             participantId: participantUser._id,
             source: 'meetup_request_accepted'
           });
-          
+
           if (!existingMeeting) {
             await Meeting.create({
               vcId: vcUser._id,
@@ -388,10 +388,10 @@ export const updateVCMeetupStatus = async (req, res) => {
         }
       }
     }
-    
-    res.json({ message: 'Meeting accepted successfully perfectly cleanly securely expertly accurately effortlessly beautifully.', request });
+
+    res.json({ message: 'Meeting accepted successfully.', request });
   } catch (error) {
-    res.status(500).json({ message: 'Server fluently explicitly seamlessly successfully flawlessly comfortably proactively successfully inherently successfully beautifully smoothly smartly securely efficiently error.', error: error.message });
+    res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
 
@@ -404,6 +404,44 @@ export const getParticipantMeetings = async (req, res) => {
     const meetings = await Meeting.find({ participantId: userId }).sort({ createdAt: -1 });
     res.json(meetings);
   } catch (error) {
-    res.status(500).json({ message: 'Server dynamically implicitly organically recursively cleanly correctly actively natively smoothly effectively seamlessly automatically confidently smoothly naturally reliably smartly error.', error: error.message });
+    res.status(500).json({ message: 'Server error.', error: error.message });
+  }
+};// @desc    Accept a specific project meetup request
+// @route   POST /api/users/accept-project-meetup
+// @access  Public
+export const acceptProjectMeetup = async (req, res) => {
+  try {
+    const { vcUserId, participantUserId, projectId } = req.body;
+
+    const vcUser = await User.findById(vcUserId);
+    const participantUser = await User.findById(participantUserId);
+    const project = await Project.findById(projectId);
+
+    if (!vcUser || !participantUser || !project) {
+      return res.status(404).json({ message: 'Required entities missing.' });
+    }
+
+    const existingMeeting = await Meeting.findOne({
+      vcId: vcUser._id,
+      participantId: participantUser._id,
+      projectId: project._id,
+      source: 'meetup_request_accepted'
+    });
+
+    if (!existingMeeting) {
+      const meeting = await Meeting.create({
+        vcId: vcUser._id,
+        vcName: vcUser.username,
+        participantId: participantUser._id,
+        participantName: participantUser.username,
+        projectId: project._id,
+        source: 'meetup_request_accepted'
+      });
+      return res.status(201).json({ message: 'Project accepted.', meeting });
+    }
+
+    res.json({ message: 'Project already accepted.', meeting: existingMeeting });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error accepting project.', error: error.message });
   }
 };
