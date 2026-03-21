@@ -109,3 +109,18 @@
     padding: 2.5rem 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .login-content {
+    padding: 1rem;
+  }
+  .login-card {
+    padding: 2rem 1.5rem;
+  }
+  .login-card h2 {
+    font-size: 1.8rem;
+  }
+  .login-submit-btn {
+    padding: 0.8rem;
+  }
+}

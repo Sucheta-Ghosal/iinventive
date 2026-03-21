@@ -25,10 +25,10 @@ function Header() {
       <Link to="/" style={{ textDecoration: 'none' }}>
         <h1 className="logo">iinventive <span>2026</span></h1>
       </Link>
-      <div className="nav-actions" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <div className="nav-actions">
         {userInfo ? (
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <span style={{ color: '#94a3b8', fontSize: '0.95rem' }}>{userInfo.role} Logged In: <strong>{userInfo.username}</strong></span>
+          <div className="nav-user-actions">
+            <span className="user-role-badge">{userInfo.role} Logged In: <strong>{userInfo.username}</strong></span>
             {userInfo.role === 'VC' && (
               <>
                 <button className="login-btn" onClick={() => navigate('/vc/meetups')} style={{ background: 'rgba(236, 72, 153, 0.15)', border: '1px solid rgba(236, 72, 153, 0.4)', color: '#ec4899' }}>Meetup Requests</button>
