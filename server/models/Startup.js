@@ -18,6 +18,10 @@ const startupSchema = new mongoose.Schema({
   projects: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project'
+  }],
+  requestedVCs: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'VC'
   }]
 }, {
   timestamps: true

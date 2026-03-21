@@ -7,6 +7,8 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import DataEntryPage from './pages/DataEntryPage/DataEntryPage';
 import CreateVcPage from './pages/DataEntryPage/CreateVcPage';
 import CreateParticipantPage from './pages/DataEntryPage/CreateParticipantPage';
+import VCDashboardPage from './pages/VCDashboardPage/VCDashboardPage';
+import ParticipantDashboardPage from './pages/ParticipantDashboardPage/ParticipantDashboardPage';
 import './App.css';
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
         <Route path="/data-entry" element={<DataEntryPage />} />
         <Route path="/data-entry/vc" element={<CreateVcPage />} />
         <Route path="/data-entry/participant" element={<CreateParticipantPage />} />
+        <Route path="/vc/dashboard" element={<VCDashboardPage />} />
+        <Route path="/participant/dashboard" element={<ParticipantDashboardPage />} />
       </Routes>
     </Router>
   );

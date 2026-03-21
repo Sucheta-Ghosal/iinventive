@@ -26,9 +26,15 @@ function Header() {
         <h1 className="logo">iinventive <span>2026</span></h1>
       </Link>
       <div className="nav-actions" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-        {userInfo && userInfo.role === 'VC' ? (
+        {userInfo ? (
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-            <span style={{ color: '#94a3b8', fontSize: '0.95rem' }}>VC Logged In: <strong>{userInfo.username}</strong></span>
+            <span style={{ color: '#94a3b8', fontSize: '0.95rem' }}>{userInfo.role} Logged In: <strong>{userInfo.username}</strong></span>
+            {userInfo.role === 'VC' && (
+              <button className="login-btn" onClick={() => navigate('/vc/dashboard')} style={{ background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}>My Interests</button>
+            )}
+            {(userInfo.role === 'Innovator' || userInfo.role === 'Startup') && (
+              <button className="login-btn" onClick={() => navigate('/participant/dashboard')} style={{ background: 'rgba(52, 211, 153, 0.15)', border: '1px solid rgba(52, 211, 153, 0.4)', color: '#34d399' }}>My Projects</button>
+            )}
             <button className="login-btn" onClick={handleLogout} style={{ background: 'rgba(239,68,68,0.2)', border: '1px solid rgba(239,68,68,0.4)', color: '#ef4444' }}>Logout</button>
           </div>
         ) : (

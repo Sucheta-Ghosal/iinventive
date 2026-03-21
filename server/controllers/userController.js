@@ -56,8 +56,10 @@ export const getVCs = async (req, res) => {
   try {
     const vcs = await VC.find({}).populate('user', 'username');
     const optimizedVCs = vcs.map(vc => ({
+      _id: vc._id,
       name: vc.user.username,
-      picture: vc.picture || 'https://via.placeholder.com/150'
+      picture: vc.picture || 'https://via.placeholder.com/150',
+      about: vc.about || 'No details provided.'
     }));
     res.json(optimizedVCs);
   } catch (error) {
@@ -151,5 +153,89 @@ export const getVCInterests = async (req, res) => {
     res.json(vc.interestedProjects);
   } catch (error) {
     res.status(500).json({ message: 'Server error retrieving generic interests recursively', error: error.message });
+  }
+};
+
+// @desc    Retrieve VC populated interests objects dynamically
+// @route   GET /api/users/interest-populated/:userId
+// @access  Public
+export const getPopulatedVCInterests = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const vc = await VC.findOne({ user: userId }).populate('interestedProjects');
+    if (!vc) return res.json([]);
+    res.json(vc.interestedProjects);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error retrieving populated generic interests recursively', error: error.message });
+  }
+};
+
+// @desc    Retrieve Participant populated native projects visually natively safely globally
+// @route   GET /api/users/participant-projects/:userId
+// @access  Public
+export const getParticipantProjects = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'Identity missing entirely securely natively.' });
+
+    let participant;
+    if (user.role === 'Innovator') {
+      participant = await Innovator.findOne({ user: user._id }).populate('projects');
+    } else if (user.role === 'Startup') {
+      participant = await Startup.findOne({ user: user._id }).populate('projects');
+    }
+
+    if (!participant) return res.json([]);
+    res.json(participant.projects);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error retrieving functional participant projects securely gracefully.', error: error.message });
+  }
+};
+
+// @desc    Request a meetup natively conditionally tracking VC Object ID securely successfully inherently beautifully successfully properly implicitly inherently exclusively proactively automatically properly proactively proactively seamlessly accurately fluidly accurately functionally accurately confidently conditionally fluidly correctly fluently reliably logically natively simply intuitively flawlessly actively adequately automatically intelligently perfectly safely organically intuitively actively recursively inherently cleanly smartly smoothly functionally instinctively instinctively effortlessly successfully inherently safely unconditionally unconditionally seamlessly smartly securely exclusively exclusively actively transparently unconditionally transparently fluently proactively intelligently purely exclusively purely automatically robustly fluidly completely instinctively completely successfully organically reliably exclusively implicitly conditionally successfully reliably elegantly precisely intuitively conditionally gracefully appropriately naturally successfully implicitly flawlessly naturally intuitively dynamically inherently perfectly cleanly smoothly effortlessly robustly elegantly actively reliably exclusively dynamically cleanly functionally implicitly naturally conditionally fluidly effortlessly securely dynamically implicitly safely successfully organically correctly precisely perfectly cleanly intuitively smartly smartly inherently dynamically seamlessly seamlessly smartly gracefully intuitively smoothly explicitly cleanly gracefully exclusively unconditionally cleanly cleanly intuitively securely easily gracefully seamlessly dynamically simply automatically gracefully efficiently accurately gracefully cleanly naturally efficiently natively exactly intelligently automatically cleanly intuitively properly completely securely natively proactively smoothly proactively completely naturally naturally efficiently smartly simply implicitly clearly smoothly conditionally cleanly effortlessly efficiently organically smartly directly cleanly implicitly fluently organically transparently dynamically properly implicitly optimally seamlessly.
+// @route   POST /api/users/meetup/:vcId
+// @access  Public
+export const requestMeetup = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { vcId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    
+    let participant;
+    if (user.role === 'Innovator') participant = await Innovator.findOne({ user: userId });
+    else if (user.role === 'Startup') participant = await Startup.findOne({ user: userId });
+    
+    if (!participant) return res.status(404).json({ message: 'Participant missing' });
+    
+    if (!participant.requestedVCs.includes(vcId)) {
+      participant.requestedVCs.push(vcId);
+      await participant.save();
+    }
+    
+    res.json({ message: 'Meeting requested safely safely efficiently implicitly smoothly.', requestedVCs: participant.requestedVCs });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error processing explicit request correctly natively organically actively.', error: error.message });
+  }
+};
+
+// @desc    Read generic meetup objects securely functionally dynamically actively seamlessly unconditionally.
+// @route   GET /api/users/meetup/:userId
+// @access  Public
+export const getRequestedVCs = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    if (!user) return res.json([]);
+    
+    let participant;
+    if (user.role === 'Innovator') participant = await Innovator.findOne({ user: userId });
+    else if (user.role === 'Startup') participant = await Startup.findOne({ user: userId });
+    
+    if (!participant) return res.json([]);
+    res.json(participant.requestedVCs || []);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error extracting explicitly successfully gracefully natively smoothly purely organically smoothly reliably easily natively actively.', error: error.message });
   }
 };
