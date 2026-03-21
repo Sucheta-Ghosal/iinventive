@@ -11,6 +11,17 @@ function CreateVcPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setVcData(prev => ({ ...prev, picture: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleVcSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -76,8 +87,19 @@ function CreateVcPage() {
             <div className="form-section">
               <h3>VC Details Spec</h3>
               <div className="form-group">
-                <label>Profile Picture URL (Optional)</label>
-                <input type="url" value={vcData.picture} onChange={(e) => setVcData({...vcData, picture: e.target.value})} placeholder="https://example.com/image.jpg" />
+                <label>Profile Picture (Browse files)</label>
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  onChange={handleFileChange} 
+                  className="file-input"
+                />
+                {vcData.picture && (
+                  <div className="image-preview" style={{ marginTop: '0.8rem' }}>
+                    <img src={vcData.picture} alt="Preview" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #e2e8f0' }} />
+                    <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.2rem 0 0 0' }}>Picture ready</p>
+                  </div>
+                )}
               </div>
               <div className="form-group">
                 <label>About (Max 5000 Characters)</label>

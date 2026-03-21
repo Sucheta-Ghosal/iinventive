@@ -8,13 +8,43 @@ function CreateParticipantPage() {
   const [participantData, setParticipantData] = useState({
     role: 'Innovator', // or Startup
     username: '', password: '', email: '', phone: '',
-    projectTitle: '', projectType: 'Health Care', projectDescription: '', affiliation: '', picture: ''
+    projectTitle: '', projectType: 'Health Care', projectDescription: '', affiliation: '', pictures: []
   });
-  
+
   const [usernameStatus, setUsernameStatus] = useState('idle'); // idle, checking, exists, new
   const [checkingError, setCheckingError] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    const availableSlots = 4 - participantData.pictures.length;
+    
+    if (availableSlots <= 0) {
+      alert("You have already uploaded the maximum of 4 pictures.");
+      return;
+    }
+
+    const filesToProcess = files.slice(0, availableSlots);
+    
+    filesToProcess.forEach(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setParticipantData(prev => ({ 
+          ...prev, 
+          pictures: [...prev.pictures, reader.result] 
+        }));
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const removePicture = (index) => {
+    setParticipantData(prev => ({
+      ...prev,
+      pictures: prev.pictures.filter((_, i) => i !== index)
+    }));
+  };
 
   const checkUsername = async () => {
     if (!participantData.username) return;
@@ -44,17 +74,17 @@ function CreateParticipantPage() {
   const handleParticipantSubmit = async (e) => {
     e.preventDefault();
     if (usernameStatus === 'checking' || usernameStatus === 'error') {
-       alert("Please resolve username issues first.");
-       return;
+      alert("Please resolve username issues first.");
+      return;
     }
     if (usernameStatus === 'idle') {
       alert("Please verify the username first by clicking 'Check Username'.");
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     // Prepare payload
     const payload = {
       role: participantData.role,
@@ -63,9 +93,9 @@ function CreateParticipantPage() {
       type: participantData.projectType,
       affiliation: participantData.affiliation,
       description: participantData.projectDescription,
-      picture: participantData.picture
+      pictures: participantData.pictures
     };
-    
+
     if (usernameStatus === 'new') {
       payload.password = participantData.password;
       payload.email = participantData.email;
@@ -79,7 +109,7 @@ function CreateParticipantPage() {
         body: JSON.stringify(payload)
       });
       const data = await response.json();
-      
+
       if (response.ok) {
         alert("Participant & Project Registered Successfully!");
         navigate('/');
@@ -100,7 +130,7 @@ function CreateParticipantPage() {
         <div className="form-container">
           <button className="back-btn" onClick={() => navigate('/data-entry')}>← Back to Options</button>
           <h2>Register Participant & Innovation</h2>
-          {error && <div style={{color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem'}}>{error}</div>}
+          {error && <div style={{ color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>{error}</div>}
           <form onSubmit={handleParticipantSubmit} className="data-form">
             <div className="form-section">
               <h3>User Details</h3>
@@ -108,7 +138,7 @@ function CreateParticipantPage() {
                 <div className="half">
                   <label>Role</label>
                   <select value={participantData.role} onChange={(e) => {
-                    setParticipantData({...participantData, role: e.target.value});
+                    setParticipantData({ ...participantData, role: e.target.value });
                     setUsernameStatus('idle');
                   }}>
                     <option value="Innovator">Innovator</option>
@@ -117,37 +147,37 @@ function CreateParticipantPage() {
                 </div>
                 <div className="half">
                   <label>Username</label>
-                  <div style={{display: 'flex', gap: '0.5rem'}}>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <input type="text" value={participantData.username} onChange={(e) => {
-                      setParticipantData({...participantData, username: e.target.value});
+                      setParticipantData({ ...participantData, username: e.target.value });
                       setUsernameStatus('idle');
-                    }} required style={{flex: 1}}/>
-                    <button type="button" onClick={checkUsername} style={{padding: '0.5rem 1rem', background: '#2563eb', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'}}>
+                    }} required style={{ flex: 1 }} />
+                    <button type="button" onClick={checkUsername} style={{ padding: '0.5rem 1rem', background: '#2563eb', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
                       {usernameStatus === 'checking' ? '...' : 'Verify'}
                     </button>
                   </div>
-                  {usernameStatus === 'exists' && <small style={{color: '#34d399', fontWeight: 600}}>User explicitly exists! Password & Contact hidden.</small>}
-                  {usernameStatus === 'new' && <small style={{color: '#fbbf24', fontWeight: 600}}>New Identity securely confirmed! Please enter your details below.</small>}
-                  {usernameStatus === 'error' && <small style={{color: '#ef4444', fontWeight: 600}}>{checkingError}</small>}
+                  {usernameStatus === 'exists' && <small style={{ color: '#34d399', fontWeight: 600 }}>User already exists!</small>}
+                  {usernameStatus === 'new' && <small style={{ color: '#fbbf24', fontWeight: 600 }}>New Identity confirmed! Please enter your details below.</small>}
+                  {usernameStatus === 'error' && <small style={{ color: '#ef4444', fontWeight: 600 }}>{checkingError}</small>}
                 </div>
               </div>
-              
+
               {usernameStatus === 'new' && (
                 <>
-                  <div className="form-group row" style={{marginTop: '1rem'}}>
+                  <div className="form-group row" style={{ marginTop: '1rem' }}>
                     <div className="half">
                       <label>Password</label>
-                      <input type="password" value={participantData.password} onChange={(e) => setParticipantData({...participantData, password: e.target.value})} required />
+                      <input type="password" value={participantData.password} onChange={(e) => setParticipantData({ ...participantData, password: e.target.value })} required />
                     </div>
                   </div>
-                  <div className="form-group row" style={{marginTop: '1rem'}}>
+                  <div className="form-group row" style={{ marginTop: '1rem' }}>
                     <div className="half">
                       <label>Email</label>
-                      <input type="email" value={participantData.email} onChange={(e) => setParticipantData({...participantData, email: e.target.value})} required />
+                      <input type="email" value={participantData.email} onChange={(e) => setParticipantData({ ...participantData, email: e.target.value })} required />
                     </div>
                     <div className="half">
                       <label>Phone</label>
-                      <input type="tel" value={participantData.phone} onChange={(e) => setParticipantData({...participantData, phone: e.target.value})} />
+                      <input type="tel" value={participantData.phone} onChange={(e) => setParticipantData({ ...participantData, phone: e.target.value })} />
                     </div>
                   </div>
                 </>
@@ -159,11 +189,11 @@ function CreateParticipantPage() {
                 <h3>Innovation Details</h3>
                 <div className="form-group">
                   <label>Project Title</label>
-                  <input type="text" value={participantData.projectTitle} onChange={(e) => setParticipantData({...participantData, projectTitle: e.target.value})} required />
+                  <input type="text" value={participantData.projectTitle} onChange={(e) => setParticipantData({ ...participantData, projectTitle: e.target.value })} required />
                 </div>
                 <div className="form-group">
                   <label>Project Category Type</label>
-                  <select value={participantData.projectType} onChange={(e) => setParticipantData({...participantData, projectType: e.target.value})}>
+                  <select value={participantData.projectType} onChange={(e) => setParticipantData({ ...participantData, projectType: e.target.value })}>
                     <option value="Health Care">Health Care</option>
                     <option value="Materials Science">Materials Science</option>
                     <option value="Earth Sciences">Earth Sciences</option>
@@ -174,16 +204,66 @@ function CreateParticipantPage() {
                 {usernameStatus === 'new' && (
                   <div className="form-group">
                     <label>Affiliation (Institute / Startup Name)</label>
-                    <input type="text" value={participantData.affiliation} onChange={(e) => setParticipantData({...participantData, affiliation: e.target.value})} required />
+                    <input type="text" value={participantData.affiliation} onChange={(e) => setParticipantData({ ...participantData, affiliation: e.target.value })} required />
                   </div>
                 )}
                 <div className="form-group">
-                  <label>Project Picture URL (Optional)</label>
-                  <input type="url" value={participantData.picture} onChange={(e) => setParticipantData({...participantData, picture: e.target.value})} placeholder="https://example.com/image.jpg" />
+                  <label>Project Pictures (Up to 4 images)</label>
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    multiple
+                    onChange={handleFileChange} 
+                    className="file-input"
+                    disabled={participantData.pictures.length >= 4}
+                  />
+                  <div className="images-preview-grid" style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', 
+                    gap: '1rem', 
+                    marginTop: '1rem' 
+                  }}>
+                    {participantData.pictures.map((pic, idx) => (
+                      <div key={idx} className="preview-item" style={{ position: 'relative' }}>
+                        <img 
+                          src={pic} 
+                          alt={`Preview ${idx + 1}`} 
+                          style={{ width: '100%', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} 
+                        />
+                        <button 
+                          type="button"
+                          onClick={() => removePicture(idx)}
+                          style={{ 
+                            position: 'absolute', 
+                            top: '-5px', 
+                            right: '-5px', 
+                            background: '#ef4444', 
+                            color: 'white', 
+                            border: 'none', 
+                            borderRadius: '50%', 
+                            width: '20px', 
+                            height: '20px', 
+                            cursor: 'pointer',
+                            fontSize: '12px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                          }}
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  {participantData.pictures.length > 0 && (
+                    <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '0.5rem 0 0 0' }}>
+                      {participantData.pictures.length}/4 images selected
+                    </p>
+                  )}
                 </div>
                 <div className="form-group">
                   <label>Project Description</label>
-                  <textarea rows="6" maxLength="5000" value={participantData.projectDescription} onChange={(e) => setParticipantData({...participantData, projectDescription: e.target.value})} required></textarea>
+                  <textarea rows="6" maxLength="5000" value={participantData.projectDescription} onChange={(e) => setParticipantData({ ...participantData, projectDescription: e.target.value })} required></textarea>
                 </div>
               </div>
             )}

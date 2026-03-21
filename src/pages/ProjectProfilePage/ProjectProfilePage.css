@@ -134,17 +134,19 @@
 }
 
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  width: 100%;
 }
 
 .gallery-image-wrapper {
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 10px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   transition: transform 0.3s ease;
+  height: 160px;
 }
 
 .gallery-image-wrapper:hover {
@@ -153,11 +155,10 @@
 }
 
 .gallery-image-wrapper img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  width: auto;
+  object-fit: contain;
   display: block;
-  aspect-ratio: 16 / 9;
 }
 
 @keyframes fadeInUp {

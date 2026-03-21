@@ -7,7 +7,7 @@ export const registerParticipant = async (req, res) => {
   try {
     const {
       role, username, password, email, phone, 
-      title, type, affiliation, description, picture 
+      title, type, affiliation, description, picture, pictures
     } = req.body;
 
     let user = await User.findOne({ username });
@@ -49,7 +49,9 @@ export const registerParticipant = async (req, res) => {
     }
 
     const project = await Project.create({
-      title, slug, type, affiliation, description, picture: picture ? [picture] : [], userId: user._id
+      title, slug, type, affiliation, description, 
+      picture: Array.isArray(pictures) && pictures.length > 0 ? pictures : (picture ? [picture] : []), 
+      userId: user._id
     });
 
     if (role === 'Innovator') {
