@@ -1,7 +1,7 @@
 .vc-meetups-page {
   min-height: 100vh;
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: #f8fafc;
+  color: #0f172a;
   display: flex;
   flex-direction: column;
 }
@@ -13,22 +13,24 @@
 }
 
 .request-card {
-  background: rgba(30, 41, 59, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.6rem;
   transition: all 0.3s ease;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .request-card:hover {
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(236, 72, 153, 0.3);
+  background: #ffffff;
+  border-color: rgba(236, 72, 153, 0.6);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .request-date {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #64748b;
   margin-bottom: 1.5rem;
 }
 
@@ -98,18 +100,18 @@
 .contact-reveal {
   margin-top: 1.2rem;
   padding: 1.2rem;
-  background: rgba(15, 23, 42, 0.5);
+  background: #f1f5f9;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #e2e8f0;
 }
 
 .contact-reveal p {
   margin: 0.4rem 0;
   font-size: 0.95rem;
-  color: #e2e8f0;
+  color: #334155;
 }
 
 .contact-reveal strong {
-  color: #38bdf8;
+  color: #0284c7;
   margin-right: 0.5rem;
 }

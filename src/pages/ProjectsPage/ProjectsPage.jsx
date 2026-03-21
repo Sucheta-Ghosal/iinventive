@@ -50,7 +50,7 @@ function ProjectsPage() {
   }
 
   const pageStyle = bgImage ? {
-    backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.82), rgba(15, 23, 42, 0.98)), url(${bgImage})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(248, 250, 252, 0.35), rgba(248, 250, 252, 0.95)), url(${bgImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed'
@@ -66,9 +66,9 @@ function ProjectsPage() {
         </div>
 
         {loading ? (
-          <h3 style={{ color: '#f8fafc' }}>Loading projects...</h3>
+          <h3 style={{ color: '#0f172a' }}>Loading projects...</h3>
         ) : projects.length === 0 ? (
-          <h3 style={{ color: '#f8fafc', fontStyle: 'italic', textAlign: 'center', marginTop: '2rem' }}>This category currently has no projects submitted.</h3>
+          <h3 style={{ color: '#0f172a', fontStyle: 'italic', textAlign: 'center', marginTop: '2rem' }}>This category currently has no projects submitted.</h3>
         ) : (
           <div className="projects-list">
             {projects.map((project) => (

@@ -22,8 +22,8 @@ function Header() {
 
   return (
     <header className="header">
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <h1 className="logo">iinventive <span>2026</span></h1>
+      <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+        <img src="/images/logo.jpeg" alt="iinventive 2026 logo" className="logo-img" style={{ height: '75px', objectFit: 'contain' }} />
       </Link>
       <div className="nav-actions">
         {userInfo ? (
@@ -31,13 +31,13 @@ function Header() {
             <span className="user-role-badge">{userInfo.role} Logged In: <strong>{userInfo.username}</strong></span>
             {userInfo.role === 'VC' && (
               <>
-                <button className="login-btn" onClick={() => navigate('/vc/meetups')} style={{ background: 'rgba(236, 72, 153, 0.15)', border: '1px solid rgba(236, 72, 153, 0.4)', color: '#ec4899' }}>Meetup Requests</button>
+                <button className="login-btn" onClick={() => navigate('/vc/meetups')} style={{ background: 'rgba(139, 92, 246, 0.15)', border: '1px solid rgba(139, 92, 246, 0.4)', color: '#8b5cf6' }}>Meetup Requests</button>
                 <button className="login-btn" onClick={() => navigate('/vc/dashboard')} style={{ background: 'rgba(56, 189, 248, 0.15)', border: '1px solid rgba(56, 189, 248, 0.4)', color: '#38bdf8' }}>My Interests</button>
               </>
             )}
             {(userInfo.role === 'Innovator' || userInfo.role === 'Startup') && (
               <>
-                <button className="login-btn" onClick={() => navigate('/participant/timeline')} style={{ background: 'rgba(236, 72, 153, 0.15)', border: '1px solid rgba(236, 72, 153, 0.4)', color: '#ec4899' }}>Meetup Timeline</button>
+                <button className="login-btn" onClick={() => navigate('/participant/timeline')} style={{ background: 'rgba(139, 92, 246, 0.15)', border: '1px solid rgba(139, 92, 246, 0.4)', color: '#8b5cf6' }}>Meetup Timeline</button>
                 <button className="login-btn" onClick={() => navigate('/participant/dashboard')} style={{ background: 'rgba(52, 211, 153, 0.15)', border: '1px solid rgba(52, 211, 153, 0.4)', color: '#34d399' }}>My Projects</button>
               </>
             )}
@@ -45,7 +45,7 @@ function Header() {
           </div>
         ) : (
           <>
-            <button className="login-btn" onClick={() => navigate('/data-entry')} style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.2)', color: '#f8fafc' }}>Data Entry</button>
+            <button className="login-btn" onClick={() => navigate('/data-entry')} style={{ background: 'transparent', border: '1px solid #cbd5e1', color: '#64748b' }}>Data Entry</button>
             <button className="login-btn" onClick={() => navigate('/login')}>Login</button>
           </>
         )}

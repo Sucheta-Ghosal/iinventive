@@ -53,11 +53,11 @@ function HomePage() {
   };
 
   const categories = [
-    { title: "Health Care", institute: "IIT KHARAGPUR", bgImage: "/images/healthcare_bg.png" },
-    { title: "Materials Science", institute: "IIT(BHU) VARANASI", bgImage: "/images/materials_bg.png" },
-    { title: "Earth Sciences", institute: "IIT(ISM) DHANBAD", bgImage: "/images/earth_bg.png" },
-    { title: "Artificial Intelligence", institute: "IIT PATNA", bgImage: "/images/ai_bg.png" },
-    { title: "Semiconductor Technology & Chip Design", institute: "IIT BHUBANESWAR", bgImage: "/images/semi_bg.png" },
+    { title: "Health Care", institute: "IIT KHARAGPUR", bgImage: "/images/healthcare_light_bg.png" },
+    { title: "Materials Science", institute: "IIT(BHU) VARANASI", bgImage: "/images/materials_light_bg.png" },
+    { title: "Earth Sciences", institute: "IIT(ISM) DHANBAD", bgImage: "/images/earth_light_bg.png" },
+    { title: "Artificial Intelligence", institute: "IIT PATNA", bgImage: "/images/ai_light_bg.png" },
+    { title: "Semiconductor Technology & Chip Design", institute: "IIT BHUBANESWAR", bgImage: "/images/semi_light_bg.png" },
   ];
 
   return (

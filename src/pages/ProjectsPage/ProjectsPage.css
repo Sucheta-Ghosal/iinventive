@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #0f172a;
+  background-color: #f8fafc;
 }
 
 .projects-content {
@@ -24,7 +24,7 @@
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(to right, #f8fafc, #cbd5e1);
+  background: linear-gradient(to right, #0f172a, #334155);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -33,7 +33,7 @@
 
 .projects-header p {
   font-size: 1.2rem;
-  color: #94a3b8;
+  color: #475569;
 }
 
 .projects-list {
@@ -45,8 +45,8 @@
 }
 
 .project-card {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 16px;
   padding: 2rem;
   transition: all 0.3s ease;
@@ -62,10 +62,10 @@
 .project-card:nth-child(4) { animation-delay: 0.4s; }
 
 .project-card:hover {
-  background: rgba(30, 41, 59, 0.7);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: #f1f5f9;
+  border-color: #38bdf8;
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2);
 }
 
 .project-card.clickable {
@@ -74,7 +74,7 @@
 
 .project-card h3 {
   font-size: 1.6rem;
-  color: #f8fafc;
+  color: #0f172a;
   margin-bottom: 1rem;
 }
 
@@ -87,7 +87,7 @@
 
 .submitted-by .badge {
   background: rgba(56, 189, 248, 0.1);
-  color: #38bdf8;
+  color: #0284c7;
   padding: 0.3rem 0.8rem;
   border-radius: 99px;
   font-size: 0.8rem;
@@ -97,13 +97,13 @@
 }
 
 .submitted-by strong {
-  color: #e2e8f0;
+  color: #1e293b;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
 }
 
 .project-card .description {
-  color: #94a3b8;
+  color: #475569;
   font-size: 1.05rem;
   line-height: 1.6;
 }

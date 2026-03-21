@@ -117,11 +117,11 @@ export const projectsData = {
 };
 
 export const categoryBackgrounds = {
-  "Health Care": "/images/healthcare_bg.png",
-  "Materials Science": "/images/materials_bg.png",
-  "Earth Sciences": "/images/earth_bg.png",
-  "Artificial Intelligence": "/images/ai_bg.png",
-  "Semiconductor Technology & Chip Design": "/images/semi_bg.png"
+  "Health Care": "/images/healthcare_light_bg.png",
+  "Materials Science": "/images/materials_light_bg.png",
+  "Earth Sciences": "/images/earth_light_bg.png",
+  "Artificial Intelligence": "/images/ai_light_bg.png",
+  "Semiconductor Technology & Chip Design": "/images/semi_light_bg.png"
 };
 
 export const getProjectById = (id) => {

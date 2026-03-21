@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #0f172a;
+  background-color: #f8fafc;
 }
 
 .profile-content {
@@ -20,14 +20,14 @@
 .profile-content.not-found {
   justify-content: center;
   text-align: center;
-  color: #f1f5f9;
+  color: #1e293b;
 }
 
 .back-btn {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
@@ -37,8 +37,8 @@
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f1f5f9;
+  background: #f1f5f9;
+  color: #0f172a;
   border-color: #38bdf8;
 }
 
@@ -46,17 +46,17 @@
   width: 100%;
   text-align: left;
   margin-bottom: 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #e2e8f0;
   padding-bottom: 2rem;
 }
 
 .profile-header h1 {
   font-size: 3rem;
   font-weight: 800;
-  color: #f8fafc;
+  color: #0f172a;
   line-height: 1.2;
   margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, #f8fafc, #94a3b8);
+  background: linear-gradient(90deg, #0f172a, #475569);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -67,13 +67,13 @@
   flex-direction: column;
   gap: 0.5rem;
   background: rgba(56, 189, 248, 0.05);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 1rem 1.5rem;
   border-radius: 12px;
 }
 
 .submitted-by-large .badge {
-  color: #38bdf8;
+  color: #0284c7;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -82,7 +82,7 @@
 
 .submitted-by-large h2 {
   font-size: 1.4rem;
-  color: #e2e8f0;
+  color: #1e293b;
 }
 
 .profile-description {
@@ -92,7 +92,7 @@
 
 .profile-description h3, .profile-gallery h3 {
   font-size: 1.8rem;
-  color: #cbd5e1;
+  color: #0f172a;
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
@@ -100,7 +100,7 @@
 .profile-description p {
   font-size: 1.15rem;
   line-height: 1.8;
-  color: #94a3b8;
+  color: #475569;
   white-space: pre-wrap;
 }
 
@@ -117,8 +117,8 @@
 .gallery-image-wrapper {
   overflow: hidden;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 

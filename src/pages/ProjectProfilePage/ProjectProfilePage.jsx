@@ -93,7 +93,7 @@ function ProjectProfilePage() {
 
   const bgImage = categoryBackgrounds[project.type];
   const pageStyle = bgImage ? {
-    backgroundImage: `linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.98)), url(${bgImage})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(248, 250, 252, 0.35), rgba(248, 250, 252, 0.95)), url(${bgImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed'
@@ -133,17 +133,17 @@ function ProjectProfilePage() {
         )}
 
         {userInfo && userInfo.role === 'VC' && project && (
-          <div className="interest-section" style={{ marginTop: '2.5rem', padding: '1.5rem', background: 'rgba(15, 23, 42, 0.4)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+          <div className="interest-section" style={{ marginTop: '2.5rem', padding: '1.5rem', background: 'rgba(255, 255, 255, 0.5)', borderRadius: '12px', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <h4 style={{ margin: 0, color: '#f8fafc', fontSize: '1.1rem' }}>Interested in funding or mentoring this project?</h4>
-              <p style={{ margin: '0.3rem 0 0 0', color: '#94a3b8', fontSize: '0.9rem' }}>Express your interest to formally connect with these innovators.</p>
+              <h4 style={{ margin: 0, color: '#0f172a', fontSize: '1.1rem' }}>Interested in funding or mentoring this project?</h4>
+              <p style={{ margin: '0.3rem 0 0 0', color: '#475569', fontSize: '0.9rem' }}>Express your interest to formally connect with these innovators.</p>
             </div>
             <button 
               onClick={handleToggleInterest}
               style={{
                 background: interested ? 'transparent' : 'linear-gradient(90deg, #3b82f6, #6366f1)',
-                color: interested ? '#38bdf8' : 'white',
-                border: interested ? '1px solid #38bdf8' : 'none',
+                color: interested ? '#0284c7' : 'white',
+                border: interested ? '1px solid #0284c7' : 'none',
                 padding: '0.8rem 1.5rem',
                 fontSize: '1.05rem',
                 fontWeight: '600',
