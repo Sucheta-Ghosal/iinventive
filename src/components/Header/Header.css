@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.logo span {
+  font-weight: 300;
+  color: #94a3b8;
+  -webkit-text-fill-color: #94a3b8;
+  font-size: 1.5rem;
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  border: none;
+  padding: 0.7rem 2.2rem;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 2rem;
+  }
+}
