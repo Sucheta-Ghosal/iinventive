@@ -5,9 +5,9 @@ import { categoryBackgrounds } from '../../data/projectsData';
 import './ProjectProfilePage.css';
 
 function ProjectProfilePage() {
-  const { projectSlug } = useParams();
+  const { projectId, projectSlug } = useParams();
   const navigate = useNavigate();
-  
+
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
@@ -30,10 +30,13 @@ function ProjectProfilePage() {
     }
   };
 
+  const [showShareSuccess, setShowShareSuccess] = useState(false);
+
   const handleShareURL = () => {
     const projectUrl = window.location.href;
     navigator.clipboard.writeText(projectUrl).then(() => {
-      alert("Project URL copied to clipboard! Share it with your network.");
+      setShowShareSuccess(true);
+      setTimeout(() => setShowShareSuccess(false), 3000);
     }).catch(err => {
       console.error("Failed to copy URL:", err);
       alert("Failed to copy URL. Please try again.");
@@ -50,13 +53,13 @@ function ProjectProfilePage() {
 
     window.scrollTo(0, 0);
     setLoading(true);
-    fetch(`http://localhost:5000/api/projects/profile/${projectSlug}`)
+    fetch(`http://localhost:5000/api/projects/profile/${projectId}/${projectSlug}`)
       .then(res => res.json())
       .then(data => {
         // If data returns successfully and isn't a 404 message object
         if (!data.message) {
           setProject(data);
-          
+
           if (currentUserInfo && currentUserInfo.role === 'VC') {
             fetch(`http://localhost:5000/api/users/interest/${currentUserInfo._id}`)
               .then(res => res.json())
@@ -112,10 +115,10 @@ function ProjectProfilePage() {
   return (
     <div className="profile-page" style={pageStyle}>
       <Header />
-      
+
       <main className="profile-content">
         <button onClick={() => navigate(-1)} className="back-btn">← Back to Category</button>
-        
+
         <header className="profile-header">
           <h1>{project.title}</h1>
           <div className="submitted-by-large">
@@ -148,7 +151,7 @@ function ProjectProfilePage() {
               <h4 style={{ margin: 0, color: '#0f172a', fontSize: '1.1rem' }}>Interested in funding or mentoring this project?</h4>
               <p style={{ margin: '0.3rem 0 0 0', color: '#475569', fontSize: '0.9rem' }}>Express your interest to formally connect with these innovators.</p>
             </div>
-            <button 
+            <button
               onClick={handleToggleInterest}
               style={{
                 background: interested ? 'transparent' : 'linear-gradient(90deg, #3b82f6, #6366f1)',
@@ -169,10 +172,16 @@ function ProjectProfilePage() {
         )}
 
         {userInfo && project.userId && userInfo._id === project.userId && (
-          <div style={{ marginTop: '3rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ marginTop: '3rem', width: '100%', display: 'flex', justifyContent: 'center', position: 'relative' }}>
             <button className="share-btn" onClick={handleShareURL}>
-              🔗 Share Project Link
+              <span style={{ fontSize: '1.4rem' }}>🚀</span> Share Link
             </button>
+          </div>
+        )}
+
+        {showShareSuccess && (
+          <div className="share-success-msg">
+            ✨ URL copied to clipboard! Ready to share.
           </div>
         )}
 

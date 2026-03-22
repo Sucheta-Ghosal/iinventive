@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/active-categories', getActiveCategories);
 router.get('/category/:category', getProjectsByCategory);
-router.get('/profile/:slug', getProjectBySlug);
+router.get('/profile/:id/:slug', getProjectBySlug);
 
 export default router;

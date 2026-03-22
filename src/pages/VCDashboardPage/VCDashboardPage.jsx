@@ -57,7 +57,7 @@ function VCDashboardPage() {
               <div 
                 className="dashboard-project-card clickable" 
                 key={project._id || project.id}
-                onClick={() => navigate(`/project/${project.slug}`)}
+                onClick={() => navigate(`/project/${project._id}/${project.slug}`)}
               >
                 <div className="card-top">
                   <span className="category-badge">{project.type}</span>

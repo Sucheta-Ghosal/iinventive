@@ -106,7 +106,7 @@ function ReviewProjectsPage() {
                 <div className="project-info">
                   <h3 
                     className="project-title-link" 
-                    onClick={() => navigate(`/project/${project.slug}`)}
+                    onClick={() => navigate(`/project/${project._id}/${project.slug}`)}
                   >
                     {project.title}
                   </h3>

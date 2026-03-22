@@ -75,7 +75,7 @@ function ProjectsPage() {
               <div 
                 className="project-card clickable" 
                 key={project._id || project.id}
-                onClick={() => navigate(`/project/${project.slug}`)}
+                onClick={() => navigate(`/project/${project._id}/${project.slug}`)}
                 style={{ position: 'relative' }}
               >
                 {vcInterests.includes(project._id) && (

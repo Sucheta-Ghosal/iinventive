@@ -20,7 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:categoryId" element={<ProjectsPage />} />
-        <Route path="/project/:projectSlug" element={<ProjectProfilePage />} />
+        <Route path="/project/:projectId/:projectSlug" element={<ProjectProfilePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/data-entry" element={<DataEntryPage />} />
         <Route path="/data-entry/vc" element={<CreateVcPage />} />

@@ -25,7 +25,7 @@ export const getProjectsByCategory = async (req, res) => {
 // @access  Public
 export const getProjectBySlug = async (req, res) => {
   try {
-    const project = await Project.findOne({ slug: req.params.slug });
+    const project = await Project.findById(req.params.id);
     
     if (project) {
       // Create a shallow copy to add the owner ID for backward compatibility
