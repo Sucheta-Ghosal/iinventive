@@ -63,14 +63,14 @@ function ParticipantTimelinePage() {
                     <>
                       <h3 className="timeline-title">Investment Interest Received</h3>
                       <p className="timeline-desc">
-                        Venture Capitalist <strong>{meeting.vcName}</strong> specifically expressed direct interest in your uploaded project. They are eagerly monitoring your progress.
+                        Venture Capitalist <strong>{meeting.vcName}</strong> specifically expressed direct interest in your project <strong>"{meeting.projectId?.title || 'Unknown Project'}"</strong>. They are eagerly monitoring your progress.
                       </p>
                     </>
                   ) : (
                     <>
                       <h3 className="timeline-title">Meetup Request Approved</h3>
                       <p className="timeline-desc">
-                        Venture Capitalist <strong>{meeting.vcName}</strong> officially accepted your formal networking request! You can now engage directly with them securely seamlessly.
+                        Venture Capitalist <strong>{meeting.vcName}</strong> officially accepted your formal networking request for <strong>"{meeting.projectId?.title || 'Unknown Project'}"</strong>! You can now engage directly with them securely seamlessly.
                       </p>
                     </>
                   )}

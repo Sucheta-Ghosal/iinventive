@@ -341,9 +341,28 @@ export const getVCMeetups = async (req, res) => {
     const vc = await VC.findOne({ user: vcUserId }).populate('meetupRequests.userId', 'username role contact');
     if (!vc) return res.json([]);
 
-    // Sort flawlessly explicitly cleverly securely effectively intuitively automatically comprehensively intelligently successfully intuitively cleanly
-    vc.meetupRequests.sort((a, b) => new Date(b.date) - new Date(a.date));
-    res.json(vc.meetupRequests);
+    const enhancedRequests = await Promise.all(vc.meetupRequests.map(async (request) => {
+      const userId = request.userId?._id;
+      let projectCount = 0;
+      if (userId) {
+        const innovator = await Innovator.findOne({ user: userId });
+        if (innovator) {
+          projectCount = innovator.projects.length;
+        } else {
+          const startup = await Startup.findOne({ user: userId });
+          if (startup) {
+            projectCount = startup.projects.length;
+          }
+        }
+      }
+      return {
+        ...request.toObject(),
+        projectCount
+      };
+    }));
+
+    enhancedRequests.sort((a, b) => new Date(b.date) - new Date(a.date));
+    res.json(enhancedRequests);
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
@@ -401,12 +420,16 @@ export const updateVCMeetupStatus = async (req, res) => {
 export const getParticipantMeetings = async (req, res) => {
   try {
     const { userId } = req.params;
-    const meetings = await Meeting.find({ participantId: userId }).sort({ createdAt: -1 });
+    const meetings = await Meeting.find({ participantId: userId })
+      .populate('projectId', 'title')
+      .sort({ createdAt: -1 });
     res.json(meetings);
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
-};// @desc    Accept a specific project meetup request
+};
+
+// @desc    Accept a specific project meetup request
 // @route   POST /api/users/accept-project-meetup
 // @access  Public
 export const acceptProjectMeetup = async (req, res) => {
@@ -437,6 +460,17 @@ export const acceptProjectMeetup = async (req, res) => {
         projectId: project._id,
         source: 'meetup_request_accepted'
       });
+
+      // Update VC's meetup request status to 'accepted' if it was 'pending'
+      const vc = await VC.findOne({ user: vcUserId });
+      if (vc) {
+        const reqItem = vc.meetupRequests.find(r => r.userId.toString() === participantUserId);
+        if (reqItem && reqItem.status === 'pending') {
+          reqItem.status = 'accepted';
+          await vc.save();
+        }
+      }
+
       return res.status(201).json({ message: 'Project accepted.', meeting });
     }
 

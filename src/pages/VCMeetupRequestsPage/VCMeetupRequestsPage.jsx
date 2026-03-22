@@ -93,7 +93,9 @@ function VCMeetupRequestsPage() {
                   
                   {reqItem.status === 'pending' && (
                     <div className="action-buttons">
-                      <button className="accept-btn" onClick={() => handleUpdateStatus(participantNode._id, 'accepted')}>✓ Accept</button>
+                      {reqItem.projectCount <= 1 && (
+                        <button className="accept-btn" onClick={() => handleUpdateStatus(participantNode._id, 'accepted')}>✓ Accept</button>
+                      )}
                       <button className="reject-btn" onClick={() => handleUpdateStatus(participantNode._id, 'rejected')}>✕ Decline</button>
                     </div>
                   )}

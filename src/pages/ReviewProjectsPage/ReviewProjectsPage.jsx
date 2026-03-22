@@ -11,6 +11,7 @@ function ReviewProjectsPage() {
   const [userInfo, setUserInfo] = useState(null);
   const [participantName, setParticipantName] = useState('');
   const [acceptedProjects, setAcceptedProjects] = useState([]);
+  const [rejectedProjects, setRejectedProjects] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -68,10 +69,18 @@ function ReviewProjectsPage() {
       });
       if (res.ok) {
         setAcceptedProjects(prev => [...prev, projectId]);
+        // Remove from rejected if it was there (just in case)
+        setRejectedProjects(prev => prev.filter(id => id !== projectId));
       }
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleRejectProject = (projectId) => {
+    setRejectedProjects(prev => [...prev, projectId]);
+    // Note: This is local-only for now as requested. 
+    // If persistent rejection is needed, a backend endpoint would be required.
   };
 
   return (
@@ -107,10 +116,12 @@ function ReviewProjectsPage() {
                 <div className="project-actions">
                   {acceptedProjects.includes(project._id) ? (
                     <span className="accepted-label">✓ Accepted</span>
+                  ) : rejectedProjects.includes(project._id) ? (
+                    <span className="rejected-label" style={{ color: '#ef4444', fontWeight: 'bold' }}>✕ Declined</span>
                   ) : (
                     <>
                       <button className="accept-project-btn" onClick={() => handleAcceptProject(project._id)}>Accept</button>
-                      <button className="reject-project-btn" onClick={() => {/* Just visual for now or logic if needed */}}>Reject</button>
+                      <button className="reject-project-btn" onClick={() => handleRejectProject(project._id)}>Decline</button>
                     </>
                   )}
                 </div>
