@@ -28,7 +28,7 @@ function LoginPage() {
         setError(data.message || 'Verification failed');
       }
     } catch (err) {
-      setError('Network communication failed natively securely.');
+      setError('Verification failed.');
     } finally {
       setLoading(false);
     }
@@ -41,31 +41,31 @@ function LoginPage() {
         <div className="login-card">
           <h2>Welcome Back</h2>
           <p>Please enter your credentials to access your account.</p>
-          
-          {error && <div style={{color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '0.8rem', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem'}}>{error}</div>}
-          
+
+          {error && <div style={{ color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '0.8rem', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
+
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
               <label htmlFor="username">Username</label>
-              <input 
-                type="text" 
-                id="username" 
+              <input
+                type="text"
+                id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter your username" 
-                required 
+                placeholder="Enter your username"
+                required
               />
             </div>
-            
+
             <div className="input-group">
               <label htmlFor="password">Password</label>
-              <input 
-                type="password" 
-                id="password" 
+              <input
+                type="password"
+                id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password" 
-                required 
+                placeholder="Enter your password"
+                required
               />
             </div>
 

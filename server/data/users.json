@@ -1,0 +1,151 @@
+[{
+  "_id": {
+    "$oid": "69be557fc85d47a1ac05296e"
+  },
+  "username": "Bill Gates",
+  "password": "$2b$10$UOz321rLaDmO1fBR8cetEO.YhhEolkR/ioF4wpKICBmX1Do3wwxvi",
+  "contact": {
+    "email": "bill@gmail.com",
+    "phone": "1234567890"
+  },
+  "role": "VC",
+  "createdAt": {
+    "$date": "2026-03-21T08:23:27.817Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T08:23:27.817Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69be56b1c85d47a1ac05298c"
+  },
+  "username": "Sundar Pichai",
+  "password": "$2b$10$hxQCQYR5ppw7aEdy865fhuUfmfbUfiQB4RgAnBnx7F/R8Wjpegxoy",
+  "contact": {
+    "email": "pichai@gmail.com",
+    "phone": "9876543210"
+  },
+  "role": "VC",
+  "createdAt": {
+    "$date": "2026-03-21T08:28:33.749Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T08:28:33.749Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69be5e79c10de3c4e6a6730c"
+  },
+  "username": "coding witches",
+  "password": "$2b$10$BUMthKAX0y7vDNUQOVFr2eYu5D/TMlQeV9wLY8n5/V23yTIu9g/Dy",
+  "contact": {
+    "email": "witch@gmail.com",
+    "phone": "3456789210"
+  },
+  "role": "Innovator",
+  "createdAt": {
+    "$date": "2026-03-21T09:01:45.946Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T09:01:45.946Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69be5f933488b2899b538a19"
+  },
+  "username": "creative coders",
+  "password": "$2b$10$Ke7q2AJ9QjSAClMBmLnBGu1pKRswkA5Jd36fXI.Oa0FUKMZOM8Hnm",
+  "contact": {
+    "email": "coders@gmail.com",
+    "phone": "3456789210"
+  },
+  "role": "Innovator",
+  "createdAt": {
+    "$date": "2026-03-21T09:06:27.236Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T09:06:27.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69be71373935d0dde1ae6506"
+  },
+  "username": "GlucoSense Technologies",
+  "password": "$2b$10$1VNMGYl67RdUNOxRz9G8d.aJSoX9TOF1SzV4WIeY4zEOPIhcmbw06",
+  "contact": {
+    "email": "gluco@gmail.com",
+    "phone": "1234567890"
+  },
+  "role": "Startup",
+  "createdAt": {
+    "$date": "2026-03-21T10:21:43.665Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T10:21:43.665Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69becf3308289d552802d878"
+  },
+  "username": "bitoperators",
+  "password": "$2b$10$Y7Z1ZUrKlYe/Ejx0xSta2eSgSbwXsYCCA/0POgsLxkS/5JQ1h4qm6",
+  "contact": {
+    "email": "abc@abc.com",
+    "phone": "1234567899"
+  },
+  "role": "Innovator",
+  "createdAt": {
+    "$date": "2026-03-21T17:02:43.747Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T17:02:43.747Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c041935268742a576a330c"
+  },
+  "username": "LightCore",
+  "password": "$2b$10$pu3p2lbLBMlgX5EaMqbUD.yM/6OE2kcREq3ZQq64VxGvucxOTcgdi",
+  "contact": {
+    "email": "abc@gmail.com",
+    "phone": "4536271890"
+  },
+  "role": "Innovator",
+  "createdAt": {
+    "$date": "2026-03-22T19:22:59.840Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-22T19:22:59.840Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c0d40e4dbf674e1e4edac8"
+  },
+  "username": "superadmin",
+  "password": "$2b$10$aDw056W2llzd9Ex/.IxKO.uuGKXpulazFg8pRqHD1SMAS/j9PRg8C",
+  "contact": {
+    "email": "admin@iinventive.com"
+  },
+  "role": "Superadmin",
+  "createdAt": {
+    "$date": "2026-03-23T05:47:58.771Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-23T05:47:58.771Z"
+  },
+  "__v": 0
+}]

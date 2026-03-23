@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "69be71373935d0dde1ae6508"
+  },
+  "user": {
+    "$oid": "69be71373935d0dde1ae6506"
+  },
+  "projects": [
+    {
+      "$oid": "69be71373935d0dde1ae650c"
+    }
+  ],
+  "requestedVCs": [
+    {
+      "$oid": "69be557fc85d47a1ac052970"
+    },
+    {
+      "$oid": "69be56b1c85d47a1ac05298e"
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-03-21T10:21:43.830Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T10:31:28.386Z"
+  },
+  "__v": 2
+}]

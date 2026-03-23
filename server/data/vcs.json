@@ -1,0 +1,141 @@
+[{
+  "_id": {
+    "$oid": "69be557fc85d47a1ac052970"
+  },
+  "user": {
+    "$oid": "69be557fc85d47a1ac05296e"
+  },
+  "about": "William Henry Gates III (born October 28, 1955) is an American businessman and philanthropist. A pioneer of the microcomputer revolution of the 1970s and 1980s, he co-founded the software company Microsoft in 1975 with his childhood friend Paul Allen.",
+  "picture": "https://media.cnn.com/api/v1/images/stellar/prod/231218193302-bill-gates-portrait-121823.jpg?q=w_1110,c_fill",
+  "createdAt": {
+    "$date": "2026-03-21T08:23:27.908Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-22T19:16:42.135Z"
+  },
+  "__v": 7,
+  "interestedProjects": [
+    {
+      "$oid": "69be616c57e3e4c9018fcc46"
+    },
+    {
+      "$oid": "69be5f933488b2899b538a1f"
+    },
+    {
+      "$oid": "69bed0f640ad193a495ec897"
+    }
+  ],
+  "meetupRequests": [
+    {
+      "userId": {
+        "$oid": "69be5f933488b2899b538a19"
+      },
+      "status": "accepted",
+      "_id": {
+        "$oid": "69be69c0bbd9218c02bf3711"
+      },
+      "date": {
+        "$date": "2026-03-21T09:49:52.225Z"
+      }
+    },
+    {
+      "userId": {
+        "$oid": "69be5e79c10de3c4e6a6730c"
+      },
+      "status": "rejected",
+      "_id": {
+        "$oid": "69be69ebbbd9218c02bf373f"
+      },
+      "date": {
+        "$date": "2026-03-21T09:50:35.455Z"
+      }
+    },
+    {
+      "userId": {
+        "$oid": "69be71373935d0dde1ae6506"
+      },
+      "status": "accepted",
+      "_id": {
+        "$oid": "69be71fa3935d0dde1ae6559"
+      },
+      "date": {
+        "$date": "2026-03-21T10:24:58.962Z"
+      }
+    },
+    {
+      "userId": {
+        "$oid": "69becf3308289d552802d878"
+      },
+      "status": "accepted",
+      "_id": {
+        "$oid": "69bedfa8f115d4e97deb9201"
+      },
+      "date": {
+        "$date": "2026-03-21T18:12:56.356Z"
+      }
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "69be56b1c85d47a1ac05298e"
+  },
+  "user": {
+    "$oid": "69be56b1c85d47a1ac05298c"
+  },
+  "about": "Pichai began his career as a materials engineer. Following a short stint at the management consulting firm McKinsey & Co., Pichai joined Google in 2004,[4] where he led the product management and innovation efforts for a suite of Google's client software products, including Google Chrome and ChromeOS, as well as being largely responsible for Google Drive.",
+  "picture": "https://tse2.mm.bing.net/th/id/OIP.yqPvaQzvLdVSpqy5MPem6gHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3",
+  "createdAt": {
+    "$date": "2026-03-21T08:28:33.912Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-22T19:25:23.774Z"
+  },
+  "__v": 5,
+  "interestedProjects": [
+    {
+      "$oid": "69be71373935d0dde1ae650c"
+    },
+    {
+      "$oid": "69bed0f640ad193a495ec897"
+    }
+  ],
+  "meetupRequests": [
+    {
+      "userId": {
+        "$oid": "69be5f933488b2899b538a19"
+      },
+      "status": "accepted",
+      "_id": {
+        "$oid": "69be6a88aa9831135295f00b"
+      },
+      "date": {
+        "$date": "2026-03-21T09:53:12.282Z"
+      }
+    },
+    {
+      "userId": {
+        "$oid": "69be71373935d0dde1ae6506"
+      },
+      "status": "pending",
+      "_id": {
+        "$oid": "69be73803935d0dde1ae661a"
+      },
+      "date": {
+        "$date": "2026-03-21T10:31:28.390Z"
+      }
+    },
+    {
+      "userId": {
+        "$oid": "69c041935268742a576a330c"
+      },
+      "status": "accepted",
+      "_id": {
+        "$oid": "69c042105268742a576a3411"
+      },
+      "date": {
+        "$date": "2026-03-22T19:25:04.307Z"
+      }
+    }
+  ]
+}]

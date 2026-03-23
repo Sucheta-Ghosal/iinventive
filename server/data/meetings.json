@@ -1,0 +1,139 @@
+[{
+  "_id": {
+    "$oid": "69be72193935d0dde1ae6594"
+  },
+  "vcId": {
+    "$oid": "69be557fc85d47a1ac05296e"
+  },
+  "vcName": "Bill Gates",
+  "participantId": {
+    "$oid": "69be71373935d0dde1ae6506"
+  },
+  "participantName": "GlucoSense Technologies",
+  "source": "meetup_request_accepted",
+  "createdAt": {
+    "$date": "2026-03-21T10:25:29.580Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T10:25:29.580Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69be72623935d0dde1ae65d3"
+  },
+  "vcId": {
+    "$oid": "69be56b1c85d47a1ac05298c"
+  },
+  "vcName": "Sundar Pichai",
+  "participantId": {
+    "$oid": "69be71373935d0dde1ae6506"
+  },
+  "participantName": "GlucoSense Technologies",
+  "projectId": {
+    "$oid": "69be71373935d0dde1ae650c"
+  },
+  "source": "expressed_interest",
+  "createdAt": {
+    "$date": "2026-03-21T10:26:42.366Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T10:26:42.366Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69bedfe6f115d4e97deb9262"
+  },
+  "vcId": {
+    "$oid": "69be557fc85d47a1ac05296e"
+  },
+  "vcName": "Bill Gates",
+  "participantId": {
+    "$oid": "69becf3308289d552802d878"
+  },
+  "participantName": "bitoperators",
+  "projectId": {
+    "$oid": "69bed0f640ad193a495ec897"
+  },
+  "source": "expressed_interest",
+  "createdAt": {
+    "$date": "2026-03-21T18:13:58.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T18:13:58.745Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69bee005f115d4e97deb927a"
+  },
+  "vcId": {
+    "$oid": "69be557fc85d47a1ac05296e"
+  },
+  "vcName": "Bill Gates",
+  "participantId": {
+    "$oid": "69becf3308289d552802d878"
+  },
+  "participantName": "bitoperators",
+  "projectId": {
+    "$oid": "69becf34f8a6574bb777b26b"
+  },
+  "source": "meetup_request_accepted",
+  "createdAt": {
+    "$date": "2026-03-21T18:14:29.842Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T18:14:29.842Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69bee139ea7adfa4230b3a2a"
+  },
+  "vcId": {
+    "$oid": "69be56b1c85d47a1ac05298c"
+  },
+  "vcName": "Sundar Pichai",
+  "participantId": {
+    "$oid": "69becf3308289d552802d878"
+  },
+  "participantName": "bitoperators",
+  "projectId": {
+    "$oid": "69bed0f640ad193a495ec897"
+  },
+  "createdAt": {
+    "$date": "2026-03-21T18:19:37.208Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-21T18:19:37.208Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c042235268742a576a345e"
+  },
+  "vcId": {
+    "$oid": "69be56b1c85d47a1ac05298c"
+  },
+  "vcName": "Sundar Pichai",
+  "participantId": {
+    "$oid": "69c041935268742a576a330c"
+  },
+  "participantName": "LightCore",
+  "projectId": {
+    "$oid": "69c041e15268742a576a337e"
+  },
+  "createdAt": {
+    "$date": "2026-03-22T19:25:23.766Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-22T19:25:23.766Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,6 @@
+{
+  "appId": "com.iinventive.app",
+  "appName": "iinventive2026",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

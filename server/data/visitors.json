@@ -1,0 +1,122 @@
+[{
+  "_id": {
+    "$oid": "69bed5deadda83cd97c5a2b7"
+  },
+  "visitorId": "v-1",
+  "ip": "::1",
+  "browser": "Chrome 146.0",
+  "device": "Desktop",
+  "pagesVisited": [
+    "/api/users/vcs",
+    "/api/users/login",
+    "/api/users/meetup/69be71373935d0dde1ae6506",
+    "/api/users/participant-projects/69becf3308289d552802d878",
+    "/api/projects/profile/ocean-microplastic-autonomous-harvester-71",
+    "/api/users/meetup/69becf3308289d552802d878",
+    "/api/users/meetup/69be557fc85d47a1ac052970",
+    "/api/users/vc-meetups/69be557fc85d47a1ac05296e",
+    "/api/users/participant-meetings/69becf3308289d552802d878",
+    "/api/projects/profile/federated-learning-for-regional-dialect-translation",
+    "/api/users/interest/69be557fc85d47a1ac05296e",
+    "/api/users/interest/69bed0f640ad193a495ec897",
+    "/api/users/accept-project-meetup",
+    "/api/projects/category/Artificial%20Intelligence",
+    "/api/users/interest/69be56b1c85d47a1ac05298c",
+    "/api/projects/category/Earth%20Sciences",
+    "/api/users/vc-meetups-status/69be557fc85d47a1ac05296e/69becf3308289d552802d878",
+    "/api/users/participant-meetings/69be71373935d0dde1ae6506",
+    "/api/users/interest-populated/69be557fc85d47a1ac05296e",
+    "/api/projects/category/Health%20Care",
+    "/api/projects/category/Semiconductor%20Technology%20%26%20Chip%20Design",
+    "/api/users/check/LightCore",
+    "/api/participants/register",
+    "/api/users/check/Lightcore",
+    "/api/projects/category/Materials%20Science",
+    "/api/users/meetup/69c041935268742a576a330c",
+    "/api/users/participant-projects/69c041935268742a576a330c",
+    "/api/users/participant-meetings/69c041935268742a576a330c",
+    "/api/users/meetup/69be56b1c85d47a1ac05298e",
+    "/api/users/vc-meetups/69be56b1c85d47a1ac05298c",
+    "/api/projects/profile/self-healing-biodegradable-polymers",
+    "/api/projects/profile/69be619c57e3e4c9018fcc52/graphene-infused-lightweight-armor",
+    "/api/projects/profile/69be5f933488b2899b538a1f/tele-robotic-surgical-system-for-rural-areas",
+    "/api/projects/profile/69c041e15268742a576a337e/self-healing-biodegradable-polymers",
+    "/api/projects/profile/69be60aac647c170ee09c482/autonomous-drone-swarms-for-precision-agriculture"
+  ],
+  "visitTime": {
+    "$date": "2026-03-21T17:31:10.218Z"
+  },
+  "isLoggedIn": true,
+  "userId": {
+    "$oid": "69c0d40e4dbf674e1e4edac8"
+  },
+  "createdAt": {
+    "$date": "2026-03-21T17:31:10.236Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-23T05:49:21.205Z"
+  },
+  "__v": 34
+},
+{
+  "_id": {
+    "$oid": "69bedf7af115d4e97deb9197"
+  },
+  "visitorId": "v-ffff127001",
+  "ip": "::ffff:127.0.0.1",
+  "browser": "Chrome 146.0",
+  "device": "Desktop",
+  "pagesVisited": [
+    "/api/users/meetup/69becf3308289d552802d878",
+    "/api/users/participant-projects/69becf3308289d552802d878",
+    "/api/projects/profile/ocean-microplastic-autonomous-harvester-71",
+    "/api/projects/profile/federated-learning-for-regional-dialect-translation",
+    "/api/users/vcs",
+    "/api/projects/category/Materials%20Science",
+    "/api/users/interest/69be557fc85d47a1ac05296e"
+  ],
+  "visitTime": {
+    "$date": "2026-03-21T18:12:10.580Z"
+  },
+  "isLoggedIn": false,
+  "userId": null,
+  "createdAt": {
+    "$date": "2026-03-21T18:12:10.583Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-22T19:19:45.587Z"
+  },
+  "__v": 6
+},
+{
+  "_id": {
+    "$oid": "69c153b73c1f4a2fbbb552f0"
+  },
+  "visitorId": "v-ffff1721801",
+  "ip": "::ffff:172.18.0.1",
+  "browser": "Chrome 146.0",
+  "device": "Desktop",
+  "pagesVisited": [
+    "/api/users/vcs",
+    "/api/users/login",
+    "/api/users/meetup/69be71373935d0dde1ae6506",
+    "/api/users/participant-meetings/69be71373935d0dde1ae6506",
+    "/api/users/participant-projects/69be71373935d0dde1ae6506",
+    "/api/projects/category/Semiconductor%20Technology%20%26%20Chip%20Design",
+    "/api/projects/profile/69be612057e3e4c9018fcc2a/ultra-low-power-risc-v-iot-processors"
+  ],
+  "visitTime": {
+    "$date": "2026-03-23T14:52:39.510Z"
+  },
+  "isLoggedIn": true,
+  "userId": {
+    "$oid": "69c0d40e4dbf674e1e4edac8"
+  },
+  "createdAt": {
+    "$date": "2026-03-23T14:52:39.519Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-23T17:10:28.561Z"
+  },
+  "__v": 6
+}]
