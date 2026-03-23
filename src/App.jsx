@@ -12,11 +12,14 @@ import ParticipantDashboardPage from './pages/ParticipantDashboardPage/Participa
 import VCMeetupRequestsPage from './pages/VCMeetupRequestsPage/VCMeetupRequestsPage';
 import ReviewProjectsPage from './pages/ReviewProjectsPage/ReviewProjectsPage';
 import ParticipantTimelinePage from './pages/ParticipantTimelinePage/ParticipantTimelinePage';
+import AnalyticsTracker from "./AnalyticsTracker";
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <AnalyticsTracker />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/category/:categoryId" element={<ProjectsPage />} />
@@ -31,8 +34,8 @@ function App() {
         <Route path="/participant/dashboard" element={<ParticipantDashboardPage />} />
         <Route path="/participant/timeline" element={<ParticipantTimelinePage />} />
       </Routes>
+
     </Router>
   );
 }
-
 export default App;
