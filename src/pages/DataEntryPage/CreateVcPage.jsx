@@ -5,6 +5,18 @@ import './DataEntryPage.css';
 
 function CreateVcPage() {
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const stored = localStorage.getItem('userInfo');
+    if (!stored) {
+      navigate('/login');
+      return;
+    }
+    const userInfo = JSON.parse(stored);
+    if (userInfo.role !== 'Superadmin') {
+      navigate('/');
+    }
+  }, [navigate]);
   const [vcData, setVcData] = useState({
     username: '', password: '', email: '', phone: '', about: '', picture: ''
   });

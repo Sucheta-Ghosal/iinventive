@@ -6,6 +6,18 @@ import './DataEntryPage.css';
 function DataEntryPage() {
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    const stored = localStorage.getItem('userInfo');
+    if (!stored) {
+      navigate('/login');
+      return;
+    }
+    const userInfo = JSON.parse(stored);
+    if (userInfo.role !== 'Superadmin') {
+      navigate('/');
+    }
+  }, [navigate]);
+
   return (
     <div className="data-entry-page">
       <Header />

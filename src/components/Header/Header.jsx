@@ -29,6 +29,11 @@ function Header() {
         {userInfo ? (
           <div className="nav-user-actions">
             <span className="user-role-badge">{userInfo.role} Logged In: <strong>{userInfo.username}</strong></span>
+            
+            {userInfo.role === 'Superadmin' && (
+              <button className="login-btn" onClick={() => navigate('/data-entry')} style={{ background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.4)', color: '#10b981' }}>Data Entry</button>
+            )}
+
             {userInfo.role === 'VC' && (
               <>
                 <button className="login-btn" onClick={() => navigate('/vc/meetups')} style={{ background: 'rgba(139, 92, 246, 0.15)', border: '1px solid rgba(139, 92, 246, 0.4)', color: '#8b5cf6' }}>Meetup Requests</button>
@@ -45,7 +50,6 @@ function Header() {
           </div>
         ) : (
           <>
-            <button className="login-btn" onClick={() => navigate('/data-entry')} style={{ background: 'transparent', border: '1px solid #cbd5e1', color: '#64748b' }}>Data Entry</button>
             <button className="login-btn" onClick={() => navigate('/login')}>Login</button>
           </>
         )}

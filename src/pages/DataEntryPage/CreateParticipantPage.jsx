@@ -5,6 +5,18 @@ import './DataEntryPage.css';
 
 function CreateParticipantPage() {
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const stored = localStorage.getItem('userInfo');
+    if (!stored) {
+      navigate('/login');
+      return;
+    }
+    const userInfo = JSON.parse(stored);
+    if (userInfo.role !== 'Superadmin') {
+      navigate('/');
+    }
+  }, [navigate]);
   const [participantData, setParticipantData] = useState({
     role: 'Innovator', // or Startup
     username: '', password: '', email: '', phone: '',
