@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { App as CapacitorApp } from "@capacitor/app";
+
 import HomePage from './pages/HomePage/HomePage';
 import ProjectsPage from './pages/ProjectsPage/ProjectsPage';
 import ProjectProfilePage from './pages/ProjectProfilePage/ProjectProfilePage';
@@ -13,29 +15,43 @@ import VCMeetupRequestsPage from './pages/VCMeetupRequestsPage/VCMeetupRequestsP
 import ReviewProjectsPage from './pages/ReviewProjectsPage/ReviewProjectsPage';
 import ParticipantTimelinePage from './pages/ParticipantTimelinePage/ParticipantTimelinePage';
 import AnalyticsTracker from "./AnalyticsTracker";
+
 import './App.css';
 
 function App() {
-  return (
-    <Router>
-      <AnalyticsTracker />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/category/:categoryId" element={<ProjectsPage />} />
-        <Route path="/project/:projectId/:projectSlug" element={<ProjectProfilePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/data-entry" element={<DataEntryPage />} />
-        <Route path="/data-entry/vc" element={<CreateVcPage />} />
-        <Route path="/data-entry/participant" element={<CreateParticipantPage />} />
-        <Route path="/vc/dashboard" element={<VCDashboardPage />} />
-        <Route path="/vc/meetups" element={<VCMeetupRequestsPage />} />
-        <Route path="/vc/review-projects/:participantId" element={<ReviewProjectsPage />} />
-        <Route path="/participant/dashboard" element={<ParticipantDashboardPage />} />
-        <Route path="/participant/timeline" element={<ParticipantTimelinePage />} />
-      </Routes>
+  useEffect(() => {
+    CapacitorApp.addListener("backButton", ({ canGoBack }) => {
+      if (canGoBack) {
+        window.history.back();
+      } else {
+        CapacitorApp.exitApp();
+      }
+    });
+  }, []);
 
-    </Router>
+  return (<Router> <AnalyticsTracker />
+
+    ```
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/category/:categoryId" element={<ProjectsPage />} />
+      <Route path="/project/:projectId/:projectSlug" element={<ProjectProfilePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/data-entry" element={<DataEntryPage />} />
+      <Route path="/data-entry/vc" element={<CreateVcPage />} />
+      <Route path="/data-entry/participant" element={<CreateParticipantPage />} />
+      <Route path="/vc/dashboard" element={<VCDashboardPage />} />
+      <Route path="/vc/meetups" element={<VCMeetupRequestsPage />} />
+      <Route path="/vc/review-projects/:participantId" element={<ReviewProjectsPage />} />
+      <Route path="/participant/dashboard" element={<ParticipantDashboardPage />} />
+      <Route path="/participant/timeline" element={<ParticipantTimelinePage />} />
+    </Routes>
+
+  </Router>
+
+
   );
 }
+
 export default App;
