@@ -70,28 +70,28 @@ function CreateVcPage() {
         <div className="form-container">
           <button className="back-btn" onClick={() => navigate('/data-entry')}>← Back to Options</button>
           <h2>Register Venture Capitalist</h2>
-          {error && <div style={{color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem'}}>{error}</div>}
+          {error && <div style={{ color: '#ef4444', backgroundColor: 'rgba(239,68,68,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>{error}</div>}
           <form onSubmit={handleVcSubmit} className="data-form">
             <div className="form-section">
               <h3>Core User Identity (VC Role)</h3>
               <div className="form-group row">
                 <div className="half">
                   <label>Username</label>
-                  <input type="text" value={vcData.username} onChange={(e) => setVcData({...vcData, username: e.target.value})} required />
+                  <input type="text" value={vcData.username} onChange={(e) => setVcData({ ...vcData, username: e.target.value })} required />
                 </div>
                 <div className="half">
                   <label>Password</label>
-                  <input type="password" value={vcData.password} onChange={(e) => setVcData({...vcData, password: e.target.value})} required />
+                  <input type="password" value={vcData.password} onChange={(e) => setVcData({ ...vcData, password: e.target.value })} required />
                 </div>
               </div>
               <div className="form-group row">
                 <div className="half">
                   <label>Contact Email</label>
-                  <input type="email" value={vcData.email} onChange={(e) => setVcData({...vcData, email: e.target.value})} required />
+                  <input type="email" value={vcData.email} onChange={(e) => setVcData({ ...vcData, email: e.target.value })} required />
                 </div>
                 <div className="half">
                   <label>Contact Phone (Optional)</label>
-                  <input type="tel" value={vcData.phone} onChange={(e) => setVcData({...vcData, phone: e.target.value})} />
+                  <input type="tel" value={vcData.phone} onChange={(e) => setVcData({ ...vcData, phone: e.target.value })} />
                 </div>
               </div>
             </div>
@@ -100,10 +100,10 @@ function CreateVcPage() {
               <h3>VC Details Spec</h3>
               <div className="form-group">
                 <label>Profile Picture (Browse files)</label>
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handleFileChange} 
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
                   className="file-input"
                 />
                 {vcData.picture && (
@@ -115,11 +115,11 @@ function CreateVcPage() {
               </div>
               <div className="form-group">
                 <label>About (Max 5000 Characters)</label>
-                <textarea rows="6" maxLength="5000" value={vcData.about} onChange={(e) => setVcData({...vcData, about: e.target.value})} required></textarea>
+                <textarea rows="6" maxLength="5000" value={vcData.about} onChange={(e) => setVcData({ ...vcData, about: e.target.value })} required></textarea>
               </div>
             </div>
             <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? 'Registering...' : 'Register VC Model'}
+              {loading ? 'Registering...' : 'Register VC'}
             </button>
           </form>
         </div>
